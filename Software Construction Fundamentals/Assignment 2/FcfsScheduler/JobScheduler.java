@@ -3,12 +3,7 @@ import java.util.Comparator;
 import java.util.Scanner;
 
 public class JobScheduler {
-    private static int timeUtilized;
-
-    JobScheduler() {
-        timeUtilized = 0;
-    }
-
+    private static int timeUtilized = 0;
     /**
      * This Function Calculates the completion time, turn around time, waiting time,
      * average waiting time and maximum waiting time.
