@@ -10,44 +10,55 @@ public class JobScheduler {
     }
 
     /**
-     * 
+     * This Function Calculates the completion time, turn around time, waiting time,
+     * average waiting time and maximum waiting time.
      * @param processList
      */
     public static void calculateTimes(ArrayList<CpuProcess> processList){
         processList.sort(Comparator.comparingInt(CpuProcess::getArrivalTime));
         int totalWaitingTime = 0;
-        for(int i = 0; i < processList.size(); i++){
-            timeUtilized = Math.max(timeUtilized, processList.get(i).getArrivalTime());
-            processList.get(i).setCompletionTime(processList.get(i).getBurstTime() + timeUtilized);
-            processList.get(i).setTurnAroundTime(processList.get(i).getCompletionTime() - processList.get(i).getArrivalTime());
-            processList.get(i).setWaitingTime(timeUtilized - processList.get(i).getArrivalTime());
-            processList.get(i).setMaxWaitingTime(Math.max(processList.get(i).getMaxWaitingTime(), processList.get(i).getWaitingTime()));
-            totalWaitingTime += processList.get(i).getWaitingTime();
-            timeUtilized = processList.get(i).getCompletionTime();
+        for(CpuProcess process : processList){
+            timeUtilized = Math.max(timeUtilized, process.getArrivalTime());
+            process.setCompletionTime(process.getBurstTime() + timeUtilized);
+            process.setTurnAroundTime(process.getCompletionTime() - process.getArrivalTime());
+            process.setWaitingTime(timeUtilized - process.getArrivalTime());
+            CpuProcess.setMaxWaitingTime(Math.max(CpuProcess.getMaxWaitingTime(), process.getWaitingTime()));
+            totalWaitingTime += process.getWaitingTime();
+            timeUtilized = process.getCompletionTime();
         }
-        processList.get(0).setAvgWaitingTime(totalWaitingTime / processList.size());
+        CpuProcess.setAvgWaitingTime(totalWaitingTime / processList.size());
     }
 
+    /**
+     * This function systematically displays each process and its associated values.
+     * @param processList
+     */
     public static void displayResult(ArrayList<CpuProcess> processList){
         System.out.println("\n+===========================================================+");
-        System.out.println("|\t\t   Scheduled Jobs List   \t\t|");
+        System.out.println("|\t\t     Scheduled Jobs List     \t\t|");
         System.out.println("+===========================================================+");
         System.out.println("| PID | Arrival | Burst | Completion | Waiting | TurnAround |");
         System.out.println("+===========================================================+");
         for(CpuProcess process : processList){
-            System.out.printf("| %-3d | %-6d | %-4d | %-8d | %-6d | %-9d |\n",
+            System.out.printf("| %-3d | %-7d | %-5d | %-10d | %-7d | %-10d |\n",
             process.getProcessId(), process.getArrivalTime(), process.getBurstTime(),
             process.getCompletionTime(), process.getWaitingTime(), process.getTurnAroundTime());
         }
         System.out.println("+===========================================================+");
-        System.out.println(" Average Waiting Time: " + CpuProcess.getAvgWaitingTime());
-        System.out.println(" Maximum Waiting Time: " + CpuProcess.getMaxWaitingTime());
+        System.out.println("| Average Waiting Time: " + CpuProcess.getAvgWaitingTime());
+        System.out.println("| Maximum Waiting Time: " + CpuProcess.getMaxWaitingTime());
         System.out.println("+===========================================================+");
     }
 
+    /**
+     * This Function is to get a valid integer input in the given range.
+     * @param sc
+     * @param min
+     * @param max
+     * @return valid integer.
+     */
     public static int getNumInput(Scanner sc, int min, int max){
-        //A Function to get a valid integer input in the given range.
-        int num = 0;
+        int num;
         while(true){
             try{
                 num = sc.nextInt();
