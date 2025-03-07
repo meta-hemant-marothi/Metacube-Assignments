@@ -16,7 +16,7 @@ public class JobScheduler {
      */
     public static void calculateTimes(ArrayList<CpuProcess> processList){
         processList.sort(Comparator.comparingInt(CpuProcess::getArrivalTime));
-        int totalWaitingTime = 0;
+        double totalWaitingTime = 0;
         for(CpuProcess process : processList){
             timeUtilized = Math.max(timeUtilized, process.getArrivalTime());
             process.setCompletionTime(process.getBurstTime() + timeUtilized);

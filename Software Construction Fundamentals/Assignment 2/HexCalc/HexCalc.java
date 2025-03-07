@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class HexCalc {
 
@@ -70,7 +71,7 @@ public class HexCalc {
      * @param hex2
      * @return result of addition in string
      */
-    public static String add(String hex1, String hex2){
+    public static String addTwoHexString(String hex1, String hex2){
         double result = hexToDec(hex1) + hexToDec(hex2);
         return decToHex(result);
     }
@@ -81,7 +82,7 @@ public class HexCalc {
      * @param hex2
      * @return result of subtraction in string
      */
-    public static String subtract(String hex1, String hex2){
+    public static String subtractTwoHexString(String hex1, String hex2){
         double result = hexToDec(hex1) - hexToDec(hex2);
         return decToHex(Math.abs(result));
     }
@@ -92,7 +93,7 @@ public class HexCalc {
      * @param hex2
      * @return result of multiplication in string
      */
-    public static String multiply(String hex1, String hex2){
+    public static String multiplyTwoHexString(String hex1, String hex2){
         double result = hexToDec(hex1) * hexToDec(hex2);
         return decToHex(result);
     }
@@ -103,7 +104,7 @@ public class HexCalc {
      * @param hex2
      * @return result of division in form of string.
      */
-    public static String divide(String hex1, String hex2){
+    public static String divideTwoHexString(String hex1, String hex2){
         double result = hexToDec(hex1) / hexToDec(hex2);
         return decToHex(result);
     }
@@ -114,7 +115,7 @@ public class HexCalc {
      * @param hex2
      * @return boolean value
      */
-    public static boolean equals(String hex1, String hex2){
+    public static boolean isEquals(String hex1, String hex2){
         return hex1.equals(hex2);
     }
 
@@ -155,7 +156,118 @@ public class HexCalc {
         return result > 0;
     }
 
+    /**
+     * This Function is to get a valid integer input in the given range.
+     * @param sc
+     * @param min
+     * @param max
+     * @return valid integer.
+     */
+    public static int getNumInput(Scanner sc, int min, int max){
+        int num;
+        while(true){
+            try{
+                num = sc.nextInt();
+                sc.nextLine();
+                if(num >= min && num <= max)return num;
+                else System.out.println("Enter a valid number between " + min + " & " + max);
+            }catch(Exception e){
+                System.out.println("Enter a valid number between " + min + " & " + max);
+                sc.nextLine();
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        
+        Scanner sc = new Scanner(System.in);
+        String hex1, hex2;
+        while(true){
+            System.out.println("=======  Welcome to Hex Calculator  =======");
+            System.out.println("1. Arithmetic Operations");
+            System.out.println("2. Logical Operations");
+            System.out.println("3. Conversion Operations");
+            System.out.println("4. Exit the Calculator");
+            System.out.println("===========================================");
+            System.out.print("Enter the number of your choice: ");
+            int operationType = getNumInput(sc, 1, 4);
+            if(operationType == 1){
+                String arithmeticResult = null;
+                System.out.println("========  Arithmetic Operations  =========");
+                System.out.println("1. Addition of two hex numbers");
+                System.out.println("2. Subtraction of two hex numbers");
+                System.out.println("3. Multiplication of two hex numbers");
+                System.out.println("4. Division of two hex numbers");
+                System.out.println("==========================================");
+                System.out.print("Enter the number of your choice: ");
+                operationType = getNumInput(sc, 1, 4);
+                System.out.print("Enter first hexadecimal number: ");
+                hex1 = sc.next();
+                System.out.print("Enter second hexadecimal number: ");
+                hex2 = sc.next();
+                switch(operationType){
+                    case 1:
+                        arithmeticResult = addTwoHexString(hex1, hex2);
+                        break;
+                    case 2:
+                        arithmeticResult = subtractTwoHexString(hex1, hex2);
+                        break;
+                    case 3:
+                        arithmeticResult = multiplyTwoHexString(hex1, hex2);
+                        break;
+                    case 4:
+                        arithmeticResult = divideTwoHexString(hex1, hex2);
+                        break;
+                }
+                System.out.println("Result = " + arithmeticResult);
+            }else if(operationType == 2){
+                boolean logicalResult = true;
+                System.out.println("========   Logical Operations   =========");
+                System.out.println("1. Equality of two hex numbers");
+                System.out.println("2. Greater of two hex numbers");
+                System.out.println("3. Smaller of two hex numbers");
+                System.out.println("==========================================");
+                System.out.print("Enter the number of your choice: ");
+                operationType = getNumInput(sc, 1, 3);
+                System.out.print("Enter first hexadecimal number: ");
+                hex1 = sc.next();
+                System.out.print("Enter second hexadecimal number: ");
+                hex2 = sc.next();
+                switch(operationType){
+                    case 1:
+                        logicalResult = isEquals(hex1, hex2);
+                        break;
+                    case 2:
+                        logicalResult = isGreaterThan(hex1, hex2);
+                        break;
+                    case 3:
+                        logicalResult = isLessThan(hex1, hex2);
+                        break;
+                }
+                System.out.println("Result = " + logicalResult);
+            }else if(operationType == 3){
+                double decimalNum;
+                System.out.println("========  Conversion Operations  =========");
+                System.out.println("1. Decimal to Hexadecimal");
+                System.out.println("2. Hexadecimal to Decimal");
+                System.out.println("==========================================");
+                System.out.print("Enter the number of your choice: ");
+                operationType = getNumInput(sc, 1, 2);
+                switch(operationType){
+                    case 1:
+                        System.out.println("Enter the decimal number to be conerted: ");
+                        decimalNum = sc.nextDouble();
+                        System.out.println("Result = " + decToHex(decimalNum));
+                        break;
+                    case 2:
+                        System.out.println("Enter the hexadecimal number to be converted: ");
+                        hex1 = sc.next();
+                        System.out.println("Result = " + hexToDec(hex1));
+                        break;
+                }
+            }else{
+                break;
+            }
+            System.out.println("\n\n");
+        }
     }
 }
