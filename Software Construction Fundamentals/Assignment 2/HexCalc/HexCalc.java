@@ -1,4 +1,3 @@
-import java.util.Scanner;
 
 public class HexCalc {
 
@@ -9,7 +8,7 @@ public class HexCalc {
      * @param hexNum
      * @return decimal number in form of floating number.
      */
-    public double hexToDec(String hexNum){
+    public static double hexToDec(String hexNum){
         hexNum = hexNum.toUpperCase();
         int indexOfDot = -1;
         for(int i=0; i < hexNum.length(); i++){
@@ -42,7 +41,7 @@ public class HexCalc {
      * @param decimalNum
      * @return Hexadecimal number in form of String.
      */
-    public String decToHex(double decimalNum){
+    public static String decToHex(double decimalNum){
         if(decimalNum == 0)return "0";
         int integerPart = (int)decimalNum;
         double fractionPart = decimalNum - integerPart;
@@ -71,36 +70,60 @@ public class HexCalc {
      * @param hex2
      * @return result of addition in string
      */
-    public String add(String hex1, String hex2){
+    public static String add(String hex1, String hex2){
         double result = hexToDec(hex1) + hexToDec(hex2);
         return decToHex(result);
     }
     
     /**
-     * Subtracts two hexadecimal number
+     * Subtracts two hexadecimal numbers
      * @param hex1
      * @param hex2
      * @return result of subtraction in string
      */
-    public String subtract(String hex1, String hex2){
+    public static String subtract(String hex1, String hex2){
         double result = hexToDec(hex1) - hexToDec(hex2);
         return decToHex(Math.abs(result));
     }
 
-    public String multiply(String hex1, String hex2){
+    /**
+     * Multiplies two Hexadecimal numbers
+     * @param hex1
+     * @param hex2
+     * @return result of multiplication in string
+     */
+    public static String multiply(String hex1, String hex2){
         double result = hexToDec(hex1) * hexToDec(hex2);
         return decToHex(result);
     }
 
-    public String divide(String hex1, String hex2){
+    /**
+     * Divides two Hexadecimal Numbers.
+     * @param hex1
+     * @param hex2
+     * @return result of division in form of string.
+     */
+    public static String divide(String hex1, String hex2){
         double result = hexToDec(hex1) / hexToDec(hex2);
         return decToHex(result);
     }
 
-    public boolean equals(String hex1, String hex2){
-        return hex1 == hex2;
+    /**
+     * Checks if given hexadecimal values are equal or not.
+     * @param hex1
+     * @param hex2
+     * @return boolean value
+     */
+    public static boolean equals(String hex1, String hex2){
+        return hex1.equals(hex2);
     }
 
+    /**
+     * Checks if Given first hex string is greater than second hex string or not.
+     * @param hex1
+     * @param hex2
+     * @return boolean value.
+     */
     public static boolean isGreaterThan(String hex1, String hex2){
         int hex1Length = hex1.length();
         int hex2Length = hex2.length();
@@ -110,58 +133,29 @@ public class HexCalc {
             hex2 = "0".repeat(hex1Length - hex2Length) + hex2;
         }
         int result = hex1.compareTo(hex2);
-        if(result > 0){
-            return true;
-        }
-        return false;
+        return result > 0;
     }
 
-    public static void compare(String s1, String s2) {
-        int i= s1.compareToIgnoreCase(s2);
-        
-        System.out.println("What You want : \n 1. S1==S2 \n 2. S1>S2 \n 3. S1<S2 ");
-        Scanner scan = new Scanner(System.in);
-        int choice=scan.nextInt();
-        switch(choice) {
-        case 1:if(i==0) {System.out.println(true); }
-        else System.out.println(false);
-        break;
-        case 2: if(i>0)
-            System.out.println(true);
-        else
-            System.out.println(false);
-        break;
-        case 3: if(i<0)
-            System.out.println(true);
-        else
-            System.out.println(false);
-        break;
-        default: System.out.println("Invalid Selection");
-            
-            
-        }
-        
-        
-    }
-
-
+    /**
+     * Checks if Given first hex string is less than second hex string or not.
+     * @param hex1
+     * @param hex2
+     * @return boolean value.
+     */
     public static boolean isLessThan(String hex1, String hex2){
         int hex1Length = hex1.length();
         int hex2Length = hex2.length();
+
         if(hex1Length < hex2Length){
             hex1 = "0".repeat(hex2Length - hex1Length) + hex1;
         }else{
             hex2 = "0".repeat(hex1Length - hex2Length) + hex2;
         }
-        compare(hex1, hex2);
-        // if(result > 0){
-        //     return true;
-        // }
-        // return false;
-        return true;
+        int result = hex1.compareToIgnoreCase(hex2);
+        return result > 0;
     }
 
     public static void main(String[] args) {
-        System.out.println(isLessThan("E9.20", "E9.10"));
+        
     }
 }
