@@ -120,45 +120,49 @@ public class AreaOfShapes {
             System.out.print("Enter the Option number you want to choose: ");
             int choice = getIntInput(sc, 1, 5);
             double result = 0;
-
-            switch (choice) {
-                case 1:
-                    double base,
-                     height;
-                    System.out.print("Enter the base of the triangle: ");
-                    base = getDoubleInput(sc);
-                    System.out.print("Enter the height of the triangle: ");
-                    height = getDoubleInput(sc);
-                    result = obj.calculateAreaOfTriangle(base, height);
-                    break;
-                case 2:
-                    double length,
-                     breadth;
-                    System.out.print("Enter the length of the rectangle: ");
-                    length = getDoubleInput(sc);
-                    System.out.print("Enter the breadth of the rectangle: ");
-                    breadth = getDoubleInput(sc);
-                    result = obj.calculateAreaOfRectangle(length, breadth);
-                    break;
-                case 3:
-                    double side;
-                    System.out.println("Enter the length of side of square: ");
-                    side = getDoubleInput(sc);
-                    result = obj.calculateAreaOfSquare(side);
-                    break;
-                case 4:
-                    double radius;
-                    System.out.println("Enter the radius of circle: ");
-                    radius = getDoubleInput(sc);
-                    result = obj.calculateAreaOfCircle(radius);
-                    break;
-                default:
-                    flag = false;
+            try{
+                switch (choice) {
+                    case 1:
+                        double base,
+                        height;
+                        System.out.print("Enter the base of the triangle: ");
+                        base = getDoubleInput(sc);
+                        System.out.print("Enter the height of the triangle: ");
+                        height = getDoubleInput(sc);
+                        result = obj.calculateAreaOfTriangle(base, height);
+                        break;
+                    case 2:
+                        double length,
+                        breadth;
+                        System.out.print("Enter the length of the rectangle: ");
+                        length = getDoubleInput(sc);
+                        System.out.print("Enter the breadth of the rectangle: ");
+                        breadth = getDoubleInput(sc);
+                        result = obj.calculateAreaOfRectangle(length, breadth);
+                        break;
+                    case 3:
+                        double side;
+                        System.out.println("Enter the length of side of square: ");
+                        side = getDoubleInput(sc);
+                        result = obj.calculateAreaOfSquare(side);
+                        break;
+                    case 4:
+                        double radius;
+                        System.out.println("Enter the radius of circle: ");
+                        radius = getDoubleInput(sc);
+                        result = obj.calculateAreaOfCircle(radius);
+                        break;
+                    default:
+                        flag = false;
+                }
+                if(choice !=5){
+                    System.out.println("Result = " + result);
+                }
+                System.out.println("\n\n");
+            }catch(ArithmeticException e){
+                System.out.println("Error: " + e);
+                System.out.println("Try Again!!\n\n");
             }
-            if(choice !=5){
-                System.out.println("Result = " + result);
-            }
-            System.out.println("\n\n");
         }
     }
 }
