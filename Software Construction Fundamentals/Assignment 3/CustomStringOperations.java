@@ -62,23 +62,21 @@ public class CustomStringOperations{
      */
     public String getLargestWord(String str){
         int maxLength = 0;
-        String currWord = "";
+        StringBuilder currWord = new StringBuilder();
         String longestWord = "";
-        int iterator = 0;
-        while(iterator < str.length()){
-            if(str.charAt(iterator) != ' '){
-                currWord += str.charAt(iterator);
+        for(int i = 0; i < str.length(); i++){
+            if(str.charAt(i) != ' '){
+                currWord.append(str.charAt(i));
             }else{
                 if(currWord.length() >= maxLength){
-                    longestWord = currWord;
+                    longestWord = currWord.toString();
                     maxLength = currWord.length();
                 }
-                currWord = "";
+                currWord.setLength(0);
             }
-            iterator += 1;
         }
         if(currWord.length() >= maxLength){
-            longestWord = currWord;
+            longestWord = currWord.toString();
         }
         return longestWord;
     }
@@ -123,24 +121,24 @@ public class CustomStringOperations{
             switch(choice){
                 case 1:
                     System.out.print("Enter First String: ");
-                    str1 = sc.next();
+                    str1 = sc.nextLine();
                     System.out.print("Enter Second String: ");
-                    str2 = sc.next();
+                    str2 = sc.nextLine();
                     System.out.println("Result = " + obj.compareStrings(str1, str2));
                     break;
                 case 2:
                     System.out.print("Enter the string: ");
-                    str1 = sc.next();
+                    str1 = sc.nextLine();
                     System.out.println("Reversed string = " + obj.reverseString(str1));
                     break;
                 case 3:
                     System.out.print("Enter the string: ");
-                    str1 = sc.next();
+                    str1 = sc.nextLine();
                     System.out.println("Swapped case string = " + obj.swapCase(str1));
                     break;
                 case 4:
                     System.out.print("Enter the string: ");
-                    str1 = sc.next();
+                    str1 = sc.nextLine();
                     System.out.println("Largest word = " + obj.getLargestWord(str1));
                     break;
                 default:
