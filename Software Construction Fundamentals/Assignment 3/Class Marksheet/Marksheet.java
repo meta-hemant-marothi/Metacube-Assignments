@@ -91,12 +91,12 @@ public class Marksheet {
 
     /**
      * This Function is to get a valid integer input in the given range.
-     * @param sc Scanner class object.
-     * @param min Lowest range of input.
-     * @param max Highest range of input.
-     * @return Valid integer between the range.
+     * @param sc
+     * @param min
+     * @param max
+     * @return valid integer.
      */
-    public static int getNumInput(Scanner sc, int min, int max){
+    public static int getIntInput(Scanner sc, int min, int max){
         int num;
         while(true){
             try{
@@ -106,6 +106,22 @@ public class Marksheet {
                 else System.out.println("Enter a valid number between " + min + " & " + max);
             }catch(Exception e){
                 System.out.println("Enter a valid number between " + min + " & " + max);
+                sc.nextLine();
+            }
+        }
+    }
+
+    /**
+     * This Function is to get a valid double input.
+     * @param sc
+     * @return valid double value.
+     */
+    public static double getDoubleInput(Scanner sc){
+        while(true){
+            if(sc.hasNextDouble()){
+                return sc.nextDouble();
+            }else{
+                System.out.println("Enter a valid decimal number");
                 sc.nextLine();
             }
         }
@@ -125,35 +141,39 @@ public class Marksheet {
             System.out.println("6. Exit the program.");
             System.out.println("========================================");
             System.out.print("Enter the Option number you want to choose: ");
-            int choice = getNumInput(sc, 1, 6);
+            int choice = getIntInput(sc, 1, 6);
             double result;
             double grade; 
-            switch(choice){
-                case 1:
-                    System.out.print("Enter the grade you want to add: ");
-                    grade = sc.nextDouble();
-                    obj.addGrade(grade);
-                    break;
-                case 2:
-                    result = obj.getAverageGrade();
-                    System.out.printf("Result = %.2f\n", result);
-                    break;
-                case 3:
-                    result = obj.getMaximumGrade();
-                    System.out.printf("Result = %.2f\n", result);
-                    break;
-                case 4:
-                    result = obj.getMinimumGrade();
-                    System.out.printf("Result = %.2f\n", result);
-                    break;
-                case 5:
-                    result = obj.getPassPercentage();
-                    System.out.printf("Result = %.2f\n", result );
-                    break;
-                default:
-                    flag = false;
+            try{
+                switch(choice){
+                    case 1:
+                        System.out.print("Enter the grade you want to add: ");
+                        grade = getDoubleInput(sc);
+                        obj.addGrade(grade);
+                        break;
+                    case 2:
+                        result = obj.getAverageGrade();
+                        System.out.printf("Result = %.2f\n", result);
+                        break;
+                    case 3:
+                        result = obj.getMaximumGrade();
+                        System.out.printf("Result = %.2f\n", result);
+                        break;
+                    case 4:
+                        result = obj.getMinimumGrade();
+                        System.out.printf("Result = %.2f\n", result);
+                        break;
+                    case 5:
+                        result = obj.getPassPercentage();
+                        System.out.printf("Result = %.2f\n", result );
+                        break;
+                    default:
+                        flag = false;
+                }
+            }catch(Exception e){
+                System.out.println("Error: " + e);
+                System.out.println("Try Again!!!");
             }
-            
             System.out.println("\n\n");
         }
     }
