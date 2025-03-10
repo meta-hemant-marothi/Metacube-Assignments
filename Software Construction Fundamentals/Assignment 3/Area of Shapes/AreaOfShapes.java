@@ -79,7 +79,7 @@ public class AreaOfShapes {
             System.out.println("========================================");
             System.out.print("Enter the Option number you want to choose: ");
             int choice = sc.nextInt();
-            double result;
+            double result = 0;
 
             switch (choice) {
                 case 1:
@@ -115,7 +115,7 @@ public class AreaOfShapes {
                 default:
                     flag = false;
             }
-
+            System.out.println("Result = " + result);
             System.out.println("\n\n");
         }
     }
