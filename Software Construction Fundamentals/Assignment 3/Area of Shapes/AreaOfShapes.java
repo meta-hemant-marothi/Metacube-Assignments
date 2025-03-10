@@ -88,11 +88,9 @@ public class AreaOfShapes {
     }
 
     /**
-     * This Function is to get a valid integer input in the given range.
+     * This Function is to get a valid double input.
      * @param sc
-     * @param min
-     * @param max
-     * @return valid integer.
+     * @return valid double value.
      */
     public static double getDoubleInput(Scanner sc){
         while(true){
