@@ -11,7 +11,7 @@ public class AreaOfShapes {
      * @return Area of Triangle.
      * @throws ArithmeticException If base or height are negative.
      */
-    public double calculateAreaOfTriangle(double base, double height) {
+    public double calculateAreaOfTriangle(double base, double height) throws ArithmeticException {
         if (base < 0 || height < 0) {
             throw new ArithmeticException("The base or height of a triangle should not be negative");
         }
@@ -27,7 +27,7 @@ public class AreaOfShapes {
      * @return Area of rectangle.
      * @throws ArithmeticException If length or breadth are negative.
      */
-    public double calculateAreaOfRectangle(double length, double breadth) {
+    public double calculateAreaOfRectangle(double length, double breadth) throws ArithmeticException{
         if (length < 0 || breadth < 0) {
             throw new ArithmeticException("The length or breadth of a rectangle should not be negative");
         }
@@ -42,7 +42,7 @@ public class AreaOfShapes {
      * @return Area of square.
      * @throws ArithmeticException If length of side is negative.
      */
-    public double calculateAreaOfSquare(double side) {
+    public double calculateAreaOfSquare(double side) throws ArithmeticException{
         if (side < 0) {
             throw new ArithmeticException("The length of side of a square should not be negative");
         }
@@ -57,7 +57,7 @@ public class AreaOfShapes {
      * @return Area of circle.
      * @throws ArithmeticException If radius is negative.
      */
-    public double calculateAreaOfCircle(double radius) {
+    public double calculateAreaOfCircle(double radius) throws ArithmeticException {
         if (radius < 0) {
             throw new ArithmeticException("The length of radius of a circle should not be negative");
         }
