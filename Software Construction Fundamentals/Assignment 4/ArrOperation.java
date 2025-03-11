@@ -34,7 +34,7 @@ public class ArrOperation{
      */
     public int countClumps(int[] arr) throws AssertionError{
         if(arr.length == 0){
-            throw new AssertionError("Given array should not be empty.");
+            throw new AssertionError("Array is empty.");
         }
         int count = 0;
         int iterator = 1;
@@ -61,7 +61,7 @@ public class ArrOperation{
      */
     public int splitArray(int[] arr) throws AssertionError{
         if(arr.length == 0){
-            throw new AssertionError("Given array should not be empty.");
+            throw new AssertionError("Array is empty.");
         }
         int totalSumOfArray = 0;
         for(int i : arr){
@@ -89,7 +89,7 @@ public class ArrOperation{
      */
     public int[] fixXY(int[] arr, int X, int Y) throws AssertionError{
         if(arr.length == 0){
-            throw new AssertionError("Empty array passed as an argument");
+            throw new AssertionError("Array is empty.");
         }
         
         int countOfX = 0, countOfY = 0;
@@ -193,7 +193,7 @@ public class ArrOperation{
             int noOfValues = getIntInput(sc, 0, Integer.MAX_VALUE);
             int[] arr = new int[noOfValues];
             for(int i = 0; i < noOfValues; i++){
-                System.out.print("Enter " + i+1 + " value: ");
+                System.out.print("Enter " + (i+1) + " value: ");
                 arr[i] = getIntInput(sc, Integer.MIN_VALUE, Integer.MAX_VALUE);
             }
             System.out.print("The input array is: ");
