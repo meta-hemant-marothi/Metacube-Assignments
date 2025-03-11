@@ -10,7 +10,7 @@ public class Search {
      * @param index The current index being checked.
      * @return The index of the target element if found, otherwise -1.
      */
-    public static int linearSearch(int[] arr, int target, int index) {
+    public static int linearSearch(double[] arr, double target, int index) {
         if (index >= arr.length) {
             return -1;
         }
@@ -28,7 +28,7 @@ public class Search {
      * @param right The right boundary of the search range.
      * @return The index of the target element if found, otherwise -1.
      */
-    public static int binarySearch(int[] arr, int target, int left, int right) {
+    public static int binarySearch(double[] arr, double target, int left, int right) {
         if (left > right) {
             return -1;
         }
@@ -84,32 +84,33 @@ public class Search {
     public static void main(String[] args) {
             Scanner sc = new Scanner(System.in);
 
-            System.out.print("Enter the number of elements in the array: ");
-            int n = sc.nextInt();
-            int[] arr = new int[n];
-
-            for (int i = 0; i < n; i++) {
-                System.out.println("Enter " + i + " element:");
-                arr[i] = sc.nextInt();
-            }
+            
 
             while (true) {
                 System.out.println("==========  Welcome to Search Service =========");
-                System.out.println("\nChoose a search method:");
+                System.out.println("Choose a search method:");
                 System.out.println("1. Linear Search");
                 System.out.println("2. Binary Search");
                 System.out.println("3. Exit");
                 System.out.println("===============================================");
                 System.out.print("Enter your choice: ");
                 int choice = getIntInput(sc, 1, 3);
-
                 if (choice == 3) {
                     System.out.println("Exiting...");
                     break;
                 }
 
+                System.out.print("Enter the number of elements in the array: ");
+                int noOfInputValues = getIntInput(sc, 1, Integer.MAX_VALUE);
+                double[] arr = new double[noOfInputValues];
+
+                for (int i = 0; i < noOfInputValues; i++) {
+                    System.out.print("Enter " + (i+1) + " element: ");
+                    arr[i] = getDoubleInput(sc);
+                }
+
                 System.out.print("Enter the element to search: ");
-                int target = sc.nextInt();
+                double target = getDoubleInput(sc);
                 int result = -1;
 
                 switch (choice) {
@@ -123,7 +124,7 @@ public class Search {
                 }
 
                 if (result != -1) {
-                    System.out.println("Element found at index: " + result);
+                    System.out.println("Element found at position: " + (result + 1));
                 } else {
                     System.out.println("Element not found in the array.");
                 }
