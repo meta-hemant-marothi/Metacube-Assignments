@@ -9,7 +9,7 @@ public class ArrOperation{
      */
     public int maxMirror(int[] arr) throws AssertionError{
         if(arr.length == 0){
-            throw new AssertionError("Given array should not be empty.");
+            throw new AssertionError("Array is empty.");
         }
         int maxSize = 0;
         for(int i = 0; i < arr.length; i++){
@@ -103,7 +103,7 @@ public class ArrOperation{
         if(countOfX != countOfY){
             throw new AssertionError("Count of both X and Y is unequal.");
         }
-        for(int i = 0; i < arr.length; i++){
+        for(int i = 0; i < arr.length - 1; i++){
             if(arr[i] == X && arr[i+1] == X){
                 throw new AssertionError("Multiple values of X occured adjacently.");
             }
@@ -112,15 +112,14 @@ public class ArrOperation{
             throw new AssertionError("Found value of X at last index.");
         }
         int posOfY = 0;
-        for(int i = 0; i < arr.length; i++){
-            if(arr[i] == X){
-                while(arr[posOfY] != Y){
+        for(int i = 0; i < arr.length - 1; i++){
+            if(arr[i] == X && arr[i + 1] != Y){
+                while(arr[posOfY] != Y || (posOfY > 0 && arr[posOfY - 1] == X)){
                     posOfY++;
                 }
                 int temp = arr[posOfY];
                 arr[posOfY] = arr[i + 1];
                 arr[i + 1] = temp;
-                posOfY++;
             }
         }
         return arr;
@@ -220,7 +219,7 @@ public class ArrOperation{
                         System.out.println("The index of splitting is " + obj.splitArray(arr));
                         break;
                 }
-            }catch(Exception e){
+            }catch(Error e){
                 System.out.println("Error: " + e);
                 System.out.println("Try Again!!!");
             }
