@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
+import UniversalLibraries.InputValidation;
 
 public class Search {
 
@@ -46,53 +47,57 @@ public class Search {
     public static void main(String[] args) {
             Scanner sc = new Scanner(System.in);
 
-            System.out.print("Enter the number of elements in the array: ");
-            int n = sc.nextInt();
-            int[] arr = new int[n];
+            // System.out.print("Enter the number of elements in the array: ");
+            // int n = sc.nextInt();
+            // int[] arr = new int[n];
 
-            for (int i = 0; i < n; i++) {
-                System.out.println("Enter " + i + " element:");
-                arr[i] = sc.nextInt();
-            }
+            // for (int i = 0; i < n; i++) {
+            //     System.out.println("Enter " + i + " element:");
+            //     arr[i] = sc.nextInt();
+            // }
 
-            while (true) {
-                System.out.println("\nChoose a search method:");
-                System.out.println("1. Linear Search");
-                System.out.println("2. Binary Search");
-                System.out.println("3. Exit");
-                System.out.print("Enter your choice: ");
-                int choice = sc.nextInt();
+            // while (true) {
+            //     System.out.println("\nChoose a search method:");
+            //     System.out.println("1. Linear Search");
+            //     System.out.println("2. Binary Search");
+            //     System.out.println("3. Exit");
+            //     System.out.print("Enter your choice: ");
+            //     int choice = sc.nextInt();
 
-                if (choice == 3) {
-                    System.out.println("Exiting...");
-                    break;
-                }
+            //     if (choice == 3) {
+            //         System.out.println("Exiting...");
+            //         break;
+            //     }
 
-                System.out.print("Enter the element to search: ");
-                int target = sc.nextInt();
-                int result = -1;
+            //     System.out.print("Enter the element to search: ");
+            //     int target = sc.nextInt();
+            //     int result = -1;
 
-                switch (choice) {
-                    case 1:
-                        result = linearSearch(arr, target, 0);
-                        break;
-                    case 2:
-                        Arrays.sort(arr);
-                        result = binarySearch(arr, target, 0, arr.length - 1);
-                        break;
-                    default:
-                        System.out.println("Invalid choice! Try again.");
-                        continue;
-                }
+            //     switch (choice) {
+            //         case 1:
+            //             result = linearSearch(arr, target, 0);
+            //             break;
+            //         case 2:
+            //             Arrays.sort(arr);
+            //             result = binarySearch(arr, target, 0, arr.length - 1);
+            //             break;
+            //         default:
+            //             System.out.println("Invalid choice! Try again.");
+            //             continue;
+            //     }
 
-                if (result != -1) {
-                    System.out.println("Element found at index: " + result);
-                } else {
-                    System.out.println("Element not found in the array.");
-                }
-            }
+            //     if (result != -1) {
+            //         System.out.println("Element found at index: " + result);
+            //     } else {
+            //         System.out.println("Element not found in the array.");
+            //     }
+            // }
 
-            sc.close();
+            // sc.close();
+
+            InputValidation iv = new InputValidation();
+            int num = iv.getIntInput(sc, 1, 5);
         }
+    }
 
-}
+
