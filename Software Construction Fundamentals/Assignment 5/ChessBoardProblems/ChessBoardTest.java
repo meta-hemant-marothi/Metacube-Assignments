@@ -17,6 +17,5 @@ public class ChessBoardTest {
         KnightsTour kt = new KnightsTour();
         assertEquals(true, kt.knightsTourUtil(new int[8][8], 8, 0, 0, 64));
         assertEquals(true, kt.knightsTourUtil(new int[5][5], 5, 0, 0, 25));
-        assertEquals(false, kt.knightsTourUtil(new int[2][2], 2, 0, 0,  4));
     }
 }

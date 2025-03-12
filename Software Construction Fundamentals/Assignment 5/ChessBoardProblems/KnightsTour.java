@@ -10,6 +10,10 @@ public class KnightsTour {
      * Solves the Knight's Tour problem and prints the result.
      */
     public void solveKnightsTour(int n, int startX, int startY) {
+        if(n <= 1){
+            System.out.println("0");
+            return;
+        }
         int[][] board = new int[n][n];
         for (int[] row : board) Arrays.fill(row, -1);
 
@@ -96,7 +100,6 @@ public class KnightsTour {
 
             System.out.print("Enter the size of the board: ");
             int sizeOfBoard = getIntInput(sc, 1, Integer.MAX_VALUE);
-            int[] board = new int[sizeOfBoard];
             System.out.println("Enter the starting position:- ");
             System.out.print("X coordinates: ");
             int x = getIntInput(sc, 0, sizeOfBoard - 1);
