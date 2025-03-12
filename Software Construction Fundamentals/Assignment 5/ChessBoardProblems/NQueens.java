@@ -3,7 +3,6 @@ import java.util.Scanner;
 class NQueens {
     /**
      * Solves the N-Queens problem using recursion.
-     *
      * @param board The array representing the board, where board[i] is the column position of the queen in row i.
      * @param startRow The current row where a queen needs to be placed.
      * @param dimensionOfMatrix The size of the chessboard (N x N).
@@ -12,7 +11,7 @@ class NQueens {
     static boolean nQueen(int[] board, int startRow, int dimensionOfMatrix) {
         if (startRow == dimensionOfMatrix) {
             printBoard(board, dimensionOfMatrix);
-            return true; // A solution is found
+            return true;
         }
 
         boolean foundSolution = false;
