@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class NQueens {
+public class NQueens {
     /**
      * Solves the N-Queens problem using recursion.
      * @param board The array representing the board, where board[i] is the column position of the queen in row i.
@@ -8,7 +8,7 @@ class NQueens {
      * @param dimensionOfMatrix The size of the chessboard (N x N).
      * @return True if a solution is found, False otherwise.
      */
-    static boolean nQueen(int[] board, int startRow, int dimensionOfMatrix) {
+    public boolean nQueen(int[] board, int startRow, int dimensionOfMatrix) {
         if (startRow == dimensionOfMatrix) {
             printBoard(board, dimensionOfMatrix);
             return true;
@@ -33,7 +33,7 @@ class NQueens {
      * @param col The column where the queen is to be placed.
      * @return True if it's safe, False otherwise.
      */
-    static boolean isSafe(int[] board, int row, int col) {
+    public boolean isSafe(int[] board, int row, int col) {
         for (int i = 0; i < row; i++) {
             if (board[i] == col || Math.abs(board[i] - col) == Math.abs(i - row)) {
                 return false; // Same column or diagonal
@@ -47,7 +47,7 @@ class NQueens {
      * @param board The array representing queen positions.
      * @param n The size of the board.
      */
-    static void printBoard(int[] board, int n) {
+    public void printBoard(int[] board, int n) {
         System.out.println("Solution:");
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -83,7 +83,7 @@ class NQueens {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        
+        NQueens nQ = new NQueens();
         while (true) {
             System.out.println("===== Welcome to NQueens Problem Analyzer =====");
             System.out.println("Choose what to do:- ");
@@ -102,7 +102,7 @@ class NQueens {
             int sizeOfBoard = getIntInput(sc, 1, Integer.MAX_VALUE);
             int[] board = new int[sizeOfBoard];
             for (int i = 0; i < sizeOfBoard; i++) board[i] = -1;
-            if (!nQueen(board, 0, sizeOfBoard)) {
+            if (!nQ.nQueen(board, 0, sizeOfBoard)) {
                 System.out.println("No solution exists.");
             }
             System.out.println("\n");

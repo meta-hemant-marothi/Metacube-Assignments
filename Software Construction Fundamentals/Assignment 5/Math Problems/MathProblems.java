@@ -50,22 +50,6 @@ public class MathProblems{
         }
     }
 
-    /**
-     * This Function is to get a valid double input.
-     * @param sc
-     * @return valid double value.
-     */
-    public static double getDoubleInput(Scanner sc){
-        while(true){
-            if(sc.hasNextDouble()){
-                return sc.nextDouble();
-            }else{
-                System.out.println("Enter a valid decimal number");
-                sc.nextLine();
-            }
-        }
-    }
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         
