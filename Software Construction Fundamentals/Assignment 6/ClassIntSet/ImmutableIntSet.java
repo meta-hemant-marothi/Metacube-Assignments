@@ -1,87 +1,131 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * ImmutableIntSet represents an immutable set of integers from a universal set of size 1000.
+ * It provides operations like membership check, union, intersection, difference, subset check, and complement.
+ */
 public class ImmutableIntSet {
-    private static Scanner sc = new Scanner(System.in);
+    private static final Scanner sc = new Scanner(System.in);
     private final boolean[] setOfElements;
     public static final int UNIVERSAL_SET_SIZE = 1000;
 
+    /**
+     * Constructs an ImmutableIntSet from an array of integers.
+     * @param nums Array of integers to be included in the set.
+     */
     public ImmutableIntSet(int[] nums) {
         setOfElements = new boolean[ImmutableIntSet.UNIVERSAL_SET_SIZE + 1];
-        for(int num : nums){
+        for (int num : nums) {
             setOfElements[num] = true;
         }
     }
 
-    public boolean isMember(int num){
+    /**
+     * Checks if a given number is a member of the set.
+     * @param num The number to check.
+     * @return True if the number is in the set, false otherwise.
+     */
+    public boolean isMember(int num) {
         return (num >= 0 && num <= 1000 && setOfElements[num]);
     }
 
-    public int size(){
+    /**
+     * Returns the number of elements in the set.
+     * @return The size of the set.
+     */
+    public int size() {
         int count = 0;
-        for(boolean bool : setOfElements){
-            if(bool)count++;
+        for (boolean bool : setOfElements) {
+            if (bool) count++;
         }
         return count;
     }
-    
-    public boolean isSubSet(ImmutableIntSet s){
-        for(int i = 1; i <= UNIVERSAL_SET_SIZE; i++){
-            if(this.setOfElements[i] != s.isMember(i)){
+
+    /**
+     * Checks if the current set is a subset of another set.
+     * @param s The set to compare with.
+     * @return True if the current set is a subset of s, false otherwise.
+     */
+    public boolean isSubSet(ImmutableIntSet s) {
+        for (int i = 1; i <= UNIVERSAL_SET_SIZE; i++) {
+            if (this.setOfElements[i] != s.isMember(i)) {
                 return false;
             }
         }
         return true;
     }
 
-    public ImmutableIntSet getCompliment(){
+    /**
+     * Returns the complement of the current set within the universal set.
+     * @return A new ImmutableIntSet representing the complement.
+     */
+    public ImmutableIntSet getCompliment() {
         int[] complimentedSet = new int[UNIVERSAL_SET_SIZE - this.size()];
         int index = 0;
         for (int i = 1; i <= UNIVERSAL_SET_SIZE; i++) {
-            if(!setOfElements[i]){
+            if (!setOfElements[i]) {
                 complimentedSet[index++] = i;
             }
         }
         return new ImmutableIntSet(complimentedSet);
     }
 
-    public ImmutableIntSet union(ImmutableIntSet s){
+    /**
+     * Computes the union of the current set with another set.
+     * @param s The set to union with.
+     * @return A new ImmutableIntSet representing the union.
+     */
+    public ImmutableIntSet union(ImmutableIntSet s) {
         int[] unionSet = new int[s.size() + this.size()];
         int index = 0;
-        for(int i = 1; i <= UNIVERSAL_SET_SIZE; i++){
-            if(this.setOfElements[i] || s.isMember(i)){
+        for (int i = 1; i <= UNIVERSAL_SET_SIZE; i++) {
+            if (this.setOfElements[i] || s.isMember(i)) {
                 unionSet[index++] = i;
             }
         }
         return new ImmutableIntSet(unionSet);
     }
 
-    public ImmutableIntSet difference(ImmutableIntSet s){
+    /**
+     * Computes the difference between the current set and another set.
+     * @param s The set to subtract from the current set.
+     * @return A new ImmutableIntSet representing the difference.
+     */
+    public ImmutableIntSet difference(ImmutableIntSet s) {
         int[] differenceSet = new int[this.size()];
         int index = 0;
-        for(int i = 1; i <= UNIVERSAL_SET_SIZE; i++){
-            if(this.setOfElements[i] && !s.isMember(i)){
+        for (int i = 1; i <= UNIVERSAL_SET_SIZE; i++) {
+            if (this.setOfElements[i] && !s.isMember(i)) {
                 differenceSet[index++] = i;
             }
         }
         return new ImmutableIntSet(differenceSet);
     }
 
-    public ImmutableIntSet intersection(ImmutableIntSet s){
+    /**
+     * Computes the intersection of the current set with another set.
+     * @param s The set to intersect with.
+     * @return A new ImmutableIntSet representing the intersection.
+     */
+    public ImmutableIntSet intersection(ImmutableIntSet s) {
         int[] intersectionSet = new int[s.size() + this.size()];
         int index = 0;
-        for(int i = 1; i <= UNIVERSAL_SET_SIZE; i++){
-            if(this.setOfElements[i] || s.isMember(i)){
+        for (int i = 1; i <= UNIVERSAL_SET_SIZE; i++) {
+            if (this.setOfElements[i] || s.isMember(i)) {
                 intersectionSet[index++] = i;
             }
         }
         return new ImmutableIntSet(intersectionSet);
-    } 
+    }
 
-    public void displaySet(){
+    /**
+     * Displays the elements of the set.
+     */
+    public void displaySet() {
         System.out.print("{ ");
         for (int i = 1; i <= UNIVERSAL_SET_SIZE; i++) {
-            if(this.setOfElements[i]){
+            if (this.setOfElements[i]) {
                 System.out.print(i + ", ");
             }
         }
@@ -90,28 +134,34 @@ public class ImmutableIntSet {
 
     /**
      * Creates a new ImmutableIntSet by taking user input.
-     * 
      * @return An instance of ImmutableIntSet created from user input.
      */
     private static ImmutableIntSet createSet() {
         System.out.print("Enter elements (comma-separated, max 1000): ");
         String input = sc.nextLine();
         int[] nums = Arrays.stream(input.split(","))
-                           .map(String::trim)
-                           .filter(s -> !s.isEmpty())
-                           .mapToInt(Integer::parseInt).toArray();
-        return new ImmutableIntSet(nums);                   
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .mapToInt(Integer::parseInt).toArray();
+        return new ImmutableIntSet(nums);
     }
 
-    public static int getIntInput(Scanner sc, int min, int max){
+    /**
+     * Ensures valid integer input from the user within a specified range.
+     * @param sc  Scanner object for input.
+     * @param min Minimum valid value.
+     * @param max Maximum valid value.
+     * @return The validated integer input.
+     */
+    public static int getIntInput(Scanner sc, int min, int max) {
         int num;
-        while(true){
-            try{
+        while (true) {
+            try {
                 num = sc.nextInt();
                 sc.nextLine();
-                if(num >= min && num <= max)return num;
+                if (num >= min && num <= max) return num;
                 else System.out.println("Enter a valid number between " + min + " & " + max);
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Enter a valid number between " + min + " & " + max);
                 sc.nextLine();
             }
@@ -120,7 +170,6 @@ public class ImmutableIntSet {
 
     public static void main(String[] args) {
         ImmutableIntSet set1 = null, set2 = null;
-        Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.println("\n===== Immutable Int Set Operations =====");
             System.out.println("1. Create Set 1");
@@ -180,5 +229,4 @@ public class ImmutableIntSet {
             }
         }
     }
-
 }
