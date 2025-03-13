@@ -114,9 +114,11 @@ public class ImmutablePoly {
      * @return Valid floating number.
      */
     private static float getFloatInput(Scanner sc) {
+        float num;
         while (true) {
             try {
-                return Float.parseFloat(sc.nextLine().trim());
+                num = sc.nextFloat();
+                return num; 
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input! Please enter a valid number.");
             }
