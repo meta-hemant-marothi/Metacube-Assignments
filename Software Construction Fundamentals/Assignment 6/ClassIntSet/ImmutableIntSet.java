@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -17,7 +16,11 @@ public class ImmutableIntSet {
     public ImmutableIntSet(int[] nums) {
         setOfElements = new boolean[ImmutableIntSet.UNIVERSAL_SET_SIZE + 1];
         for (int num : nums) {
-            setOfElements[num] = true;
+            if(num > 0 && num <= 1000) {
+                setOfElements[num] = true;
+            }else{
+                System.out.println(num + "Not in range (1 to 1000)");
+            }
         }
     }
 
@@ -137,12 +140,12 @@ public class ImmutableIntSet {
      * @return An instance of ImmutableIntSet created from user input.
      */
     private static ImmutableIntSet createSet() {
-        System.out.print("Enter elements (comma-separated, max 1000): ");
-        String input = sc.nextLine();
-        int[] nums = Arrays.stream(input.split(","))
-                .map(String::trim)
-                .filter(s -> !s.isEmpty())
-                .mapToInt(Integer::parseInt).toArray();
+        System.out.print("Enter total number of elements you want to enter: ");
+        int[] nums = new int[getIntInput(sc, 0, Integer.MAX_VALUE)];
+        for(int i = 0; i < nums.length; i++){
+            System.out.print("Enter Element " + (i + 1)+": ");
+            nums[i] = getIntInput(sc, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        }
         return new ImmutableIntSet(nums);
     }
 
