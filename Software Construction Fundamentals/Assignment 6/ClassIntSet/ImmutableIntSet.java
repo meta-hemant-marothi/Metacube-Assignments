@@ -182,6 +182,7 @@ public class ImmutableIntSet {
             System.out.println("8. Complement of Set 1");
             System.out.println("9. Check if Set1 is Subset of Set2");
             System.out.println("10. Exit");
+            System.out.println("=========================================");
             System.out.print("Enter your choice: ");
 
             int choice = getIntInput(sc, 1, 10);
