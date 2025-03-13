@@ -25,6 +25,16 @@ public class InputValidation {
         }
     }
 
+    private static float getFloatInput(Scanner sc) {
+        while (true) {
+            try {
+                return Float.parseFloat(sc.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input! Please enter a valid number.");
+            }
+        }
+    }
+
     /**
      * This Function is to get a valid double input.
      * @param sc

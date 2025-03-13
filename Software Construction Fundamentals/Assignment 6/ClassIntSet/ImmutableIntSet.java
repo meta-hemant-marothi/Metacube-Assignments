@@ -141,7 +141,7 @@ public class ImmutableIntSet {
      */
     private static ImmutableIntSet createSet() {
         System.out.print("Enter total number of elements you want to enter: ");
-        int[] nums = new int[getIntInput(sc, 0, Integer.MAX_VALUE)];
+        int[] nums = new int[getIntInput(sc, 0, UNIVERSAL_SET_SIZE)];
         for(int i = 0; i < nums.length; i++){
             System.out.print("Enter Element " + (i + 1)+": ");
             nums[i] = getIntInput(sc, Integer.MIN_VALUE, Integer.MAX_VALUE);
