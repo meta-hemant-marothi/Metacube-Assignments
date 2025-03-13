@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class ImmutableIntSet {
     private final boolean[] setOfElements;
     public static final int UNIVERSAL_SET_SIZE = 1000;
@@ -84,6 +86,19 @@ public class ImmutableIntSet {
         System.out.println("}");
     }
 
-    
+    public static int getIntInput(Scanner sc, int min, int max){
+        int num;
+        while(true){
+            try{
+                num = sc.nextInt();
+                sc.nextLine();
+                if(num >= min && num <= max)return num;
+                else System.out.println("Enter a valid number between " + min + " & " + max);
+            }catch(Exception e){
+                System.out.println("Enter a valid number between " + min + " & " + max);
+                sc.nextLine();
+            }
+        }
+    }
 
 }
