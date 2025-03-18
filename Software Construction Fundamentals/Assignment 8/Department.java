@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Department {
-    private String name;
+    private final String name;
     public List<Employee> employees;
 
     public String getName(){
