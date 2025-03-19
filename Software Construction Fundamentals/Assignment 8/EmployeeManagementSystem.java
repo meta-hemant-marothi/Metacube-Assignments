@@ -136,6 +136,17 @@ public class EmployeeManagementSystem {
         return null;
     }
 
+    private static void viewAllDepartments(Organization org){
+        if(org.departments.isEmpty()){
+            System.out.println("No departments added.");
+            return;
+        }
+        System.out.println("==== All Departments ====");
+        for(Department dep : org.departments){
+            System.out.println("-> " + dep.getName());
+        }
+    }
+
      /**
      * This Function is to get a valid integer input in the given range.
      * @param sc
@@ -183,11 +194,12 @@ public class EmployeeManagementSystem {
                 System.out.println("3. View all employees.");
                 System.out.println("4. Print salary slips.");
                 System.out.println("5. Remove an employee.");
-                System.out.println("6. Exit.");
+                System.out.println("6. View all departments.");
+                System.out.println("7. Exit.");
                 System.out.println("=====================================================");
 
                 System.out.print("Enter your choice: ");
-                int choice = getIntInput(sc, 1, 6);
+                int choice = getIntInput(sc, 1, 7);
                 switch (choice) {
                     case 1:
                         addDepartment();
@@ -205,6 +217,10 @@ public class EmployeeManagementSystem {
                         removeEmployee();
                         break;
                     case 6:
+                        viewAllDepartments(organization);
+                        break;
+                    case 7:
+                        System.out.println("Exiting...");
                         return;
                 }
             }catch(Exception e){

@@ -3,5 +3,5 @@ public enum ShapeType {
     SQUARE,
     RECTANGLE,
     TRIANGLE,
-    POLYGON
+    REGULARPOLYGON,
 }

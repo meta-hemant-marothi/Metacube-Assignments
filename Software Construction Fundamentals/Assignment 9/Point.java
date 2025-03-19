@@ -1,22 +1,27 @@
 public class Point {
-    private int x;
-    private int y;
+    private final double x;
+    private final double y;
 
-    /**
-     * Creates a point object with given x and y coordinates.
-     * @param x
-     * @param y
-     */
-    Point(int x, int y){
+    public Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
-    public int getX(){
-        return this.x;
+    public double getX() {
+        return x;
     }
 
-    public int getY(){
-        return this.x;
+    public double getY() {
+        return y;
+    }
+
+    // Calculate the distance to another point
+    public double distanceTo(Point other) {
+        return Math.sqrt(Math.pow(other.x - this.x, 2) + Math.pow(other.y - this.y, 2));
+    }
+
+    @Override
+    public String toString() {
+        return "(" + x + ", " + y + ")";
     }
 }
