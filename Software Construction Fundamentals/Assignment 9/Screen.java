@@ -94,36 +94,6 @@ public class Screen {
         return Comparator.comparingDouble(shape -> shape.getOrigin().distanceTo(new Point(0, 0)));
     }
 
-    // Terminal UI for interaction
-    public void startUI() {
-        while (true) {
-            System.out.println("\n--- Graphics Library Menu ---");
-            System.out.println("1. Add Shape");
-            System.out.println("2. Delete a Shape");
-            System.out.println("3. Delete All Shapes of a Type");
-            System.out.println("4. Display Shapes (Sorted)");
-            System.out.println("5. Find Shapes Enclosing a Point");
-            System.out.println("6. Find Overlapping Shapes");
-            System.out.println("7. Exit");
-            System.out.print("Enter your choice: ");
-            int choice = scanner.nextInt();
-
-            switch (choice) {
-                case 1: addShapeFromUser(); break;
-                case 2: deleteShapeFromUser(); break;
-                case 3: deleteShapesByTypeFromUser(); break;
-                case 4: displayShapesSorted(); break;
-                case 5: findShapesEnclosingPointFromUser(); break;
-                case 6: findOverlappingShapesFromUser(); break;
-                case 7: {
-                    System.out.println("Exiting...");
-                    return;
-                }
-                default: System.out.println("Invalid choice! Try again.");
-            }
-        }
-    }
-
     // Get user input for adding a shape
     private void addShapeFromUser() {
         System.out.println("Available shapes: " + Arrays.toString(ShapeType.values()));
@@ -207,7 +177,7 @@ public class Screen {
     // Get user input for displaying sorted shapes
     private void displayShapesSorted() {
         System.out.println("Sort by: 1. Area  2. Perimeter  3. Timestamp  4. Origin Distance");
-        int option = scanner.nextInt();
+        int option = getIntInput(scanner, 1, 4);
         Comparator<Shape> comparator = null;
         switch (option) {
             case 1: comparator = sortByArea(); break;
@@ -224,19 +194,76 @@ public class Screen {
 
     private void findShapesEnclosingPointFromUser() {
         System.out.print("Enter X coordinate: ");
-        double x = scanner.nextDouble();
+        double x = getDoubleInput(scanner);
         System.out.print("Enter Y coordinate: ");
-        double y = scanner.nextDouble();
+        double y = getDoubleInput(scanner);
         findShapesEnclosingPoint(new Point(x, y));
     }
 
-    private void findOverlappingShapesFromUser() {
-        System.out.println("Enter shape details to check overlap:");
-        addShapeFromUser();
+    /**
+     * This Function is to get a valid integer input in the given range.
+     * @param sc
+     * @param min
+     * @param max
+     * @return valid integer.
+     */
+    public static int getIntInput(Scanner sc, int min, int max){
+        int num;
+        while(true){
+            try{
+                num = sc.nextInt();
+                sc.nextLine();
+                if(num >= min && num <= max)return num;
+                else System.out.println("Enter a valid number between " + min + " & " + max);
+            }catch(Exception e){
+                System.out.println("Enter a valid number between " + min + " & " + max);
+                sc.nextLine();
+            }
+        }
+    }
+
+    /**
+     * This Function is to get a valid double input.
+     * @param sc
+     * @return valid double value.
+     */
+    public static double getDoubleInput(Scanner sc){
+        while(true){
+            if(sc.hasNextDouble()){
+                return sc.nextDouble();
+            }else{
+                System.out.println("Enter a valid decimal number");
+                sc.nextLine();
+            }
+        }
     }
 
     public static void main(String[] args) {
         Screen screen = new Screen();
-        screen.startUI();
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("\n------ Graphics Library Menu -------");
+            System.out.println("1. Add Shape");
+            System.out.println("2. Delete a Shape");
+            System.out.println("3. Delete All Shapes of a Type");
+            System.out.println("4. Display Shapes (Sorted)");
+            System.out.println("5. Find Shapes Enclosing a Point");
+            System.out.println("6. Exit");
+            System.out.println("\n----------------------------------");
+            System.out.print("Enter your choice: ");
+            int choice = getIntInput(sc, 1, 6);
+
+            switch (choice) {
+                case 1: screen.addShapeFromUser(); break;
+                case 2: screen.deleteShapeFromUser(); break;
+                case 3: screen.deleteShapesByTypeFromUser(); break;
+                case 4: screen.displayShapesSorted(); break;
+                case 5: screen.findShapesEnclosingPointFromUser(); break;
+                case 6: 
+                    System.out.println("Exiting...");
+                    return;
+                default: System.out.println("Invalid choice! Try again.");
+            }
+        }
     }
 }
