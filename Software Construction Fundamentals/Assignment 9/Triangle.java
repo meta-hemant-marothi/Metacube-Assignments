@@ -1,25 +1,24 @@
+
+
 public class Triangle implements Shape {
-    private final Point origin;
-    private final double side;
+    private final Point origin, v2, v3;
 
-    public Triangle(Point origin, double side) {
-        this.origin = origin;
-        this.side = side;
-    }
-
-    @Override
-    public ShapeType getType(){
-        return ShapeType.SQUARE;
+    public Triangle(Point v1, Point v2, Point v3) {
+        this.origin = v1;
+        this.v2 = v2;
+        this.v3 = v3;
     }
 
     @Override
     public double getArea() {
-        return (Math.sqrt(3) / 4) * side * side;
+        return Math.abs((origin.getX() * (v2.getY() - v3.getY()) + 
+                         v2.getX() * (v3.getY() - origin.getY()) + 
+                         v3.getX() * (origin.getY() - v2.getY())) / 2.0);
     }
 
     @Override
     public double getPerimeter() {
-        return 3 * side;
+        return origin.distanceTo(v2) + v2.distanceTo(v3) + v3.distanceTo(origin);
     }
 
     @Override
@@ -29,30 +28,20 @@ public class Triangle implements Shape {
 
     @Override
     public boolean isPointEnclosed(Point p) {
-        double height = (Math.sqrt(3) / 2) * side;
-        double x1 = origin.getX(), y1 = origin.getY();
-        double x2 = x1 + side, y2 = y1;
-        double x3 = x1 + side / 2, y3 = y1 + height;
-
-        return isInsideTriangle(p, new Point(x1, y1), new Point(x2, y2), new Point(x3, y3));
+        double A = getArea();
+        double A1 = new Triangle(p, v2, v3).getArea();
+        double A2 = new Triangle(origin, p, v3).getArea();
+        double A3 = new Triangle(origin, v2, p).getArea();
+        return Math.abs(A - (A1 + A2 + A3)) < 1e-9;
     }
 
-    private boolean isInsideTriangle(Point p, Point a, Point b, Point c) {
-        double areaOrig = triangleArea(a, b, c);
-        double area1 = triangleArea(p, b, c);
-        double area2 = triangleArea(a, p, c);
-        double area3 = triangleArea(a, b, p);
-        return Math.abs(areaOrig - (area1 + area2 + area3)) < 1e-9;
-    }
-
-    private double triangleArea(Point a, Point b, Point c) {
-        return Math.abs(a.getX() * (b.getY() - c.getY()) +
-                        b.getX() * (c.getY() - a.getY()) +
-                        c.getX() * (a.getY() - b.getY())) / 2.0;
+    @Override
+    public ShapeType getType() {
+        return ShapeType.TRIANGLE;
     }
 
     @Override
     public String toString() {
-        return "Triangle [Origin: " + origin + ", Side: " + side + "]";
+        return "Triangle[origin=" + origin + ", v2=" + v2 + ", v3=" + v3 + "]";
     }
 }

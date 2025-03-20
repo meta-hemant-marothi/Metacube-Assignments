@@ -3,14 +3,13 @@ import java.util.stream.Collectors;
 
 public class Screen {
     private final List<ShapeEntry> shapes;
-    private static long timestampCounter = 0; // To track order of addition
+    private static long timestampCounter = 0;
     private final Scanner scanner = new Scanner(System.in);
 
     public Screen() {
         this.shapes = new ArrayList<>();
     }
 
-    // Internal class to store shape along with timestamp
     private static class ShapeEntry {
         Shape shape;
         long timestamp;
@@ -21,80 +20,11 @@ public class Screen {
         }
     }
 
-    // Add a shape to the screen
     public void addShape(Shape shape) {
         shapes.add(new ShapeEntry(shape, ++timestampCounter));
         System.out.println("Shape added successfully.");
     }
 
-    // Delete a specific shape instance from the screen
-    public boolean deleteShape(Shape shape) {
-        boolean removed = shapes.removeIf(entry -> entry.shape.equals(shape));
-        System.out.println(removed ? "Shape deleted." : "Shape not found.");
-        return removed;
-    }
-
-    // Delete all shapes of a specific type
-    public void deleteShapesByType(ShapeType type) {
-        boolean removed = shapes.removeIf(entry -> entry.shape.getType() == type);
-        System.out.println(removed ? "All shapes of type " + type + " deleted." : "No shapes of type " + type + " found.");
-    }
-
-    // Get all shapes sorted by a given comparator
-    public void displaySortedShapes(Comparator<Shape> comparator) {
-        List<Shape> sortedShapes = shapes.stream()
-                .map(entry -> entry.shape)
-                .sorted(comparator)
-                .collect(Collectors.toList());
-        if (sortedShapes.isEmpty()) {
-            System.out.println("No shapes to display.");
-        } else {
-            sortedShapes.forEach(System.out::println);
-        }
-    }
-
-    // Get all shapes enclosing a given point
-    public void findShapesEnclosingPoint(Point p) {
-        List<Shape> enclosingShapes = shapes.stream()
-                .map(entry -> entry.shape)
-                .filter(shape ->  shape.isPointEnclosed(p))
-                .collect(Collectors.toList());
-        if (enclosingShapes.isEmpty()) {
-            System.out.println("No shapes enclosing the given point.");
-        } else {
-            enclosingShapes.forEach(System.out::println);
-        }
-    }
-
-    
-
-    // Helper method to get timestamp of a shape
-    private long getShapeTimestamp(Shape targetShape) {
-        return shapes.stream()
-                .filter(entry -> entry.shape.equals(targetShape))
-                .map(entry -> entry.timestamp)
-                .findFirst()
-                .orElse(-1L);
-    }
-
-    // Comparators for sorting
-    public static Comparator<Shape> sortByArea() {
-        return Comparator.comparingDouble(Shape::getArea);
-    }
-
-    public static Comparator<Shape> sortByPerimeter() {
-        return Comparator.comparingDouble(Shape::getPerimeter);
-    }
-
-    public static Comparator<Shape> sortByTimestamp() {
-        return Comparator.comparingLong(shape -> timestampCounter);
-    }
-
-    public static Comparator<Shape> sortByOriginDistance() {
-        return Comparator.comparingDouble(shape -> shape.getOrigin().distanceTo(new Point(0, 0)));
-    }
-
-    // Get user input for adding a shape
     private void addShapeFromUser() {
         System.out.println("Available shapes: " + Arrays.toString(ShapeType.values()));
         System.out.print("Enter shape type: ");
@@ -103,51 +33,44 @@ public class Screen {
         try {
             ShapeType type = ShapeType.valueOf(shapeTypeInput);
             System.out.print("Enter X coordinate of origin: ");
-            double x = scanner.nextDouble();
+            double x = getDoubleInput(scanner);
             System.out.print("Enter Y coordinate of origin: ");
-            double y = scanner.nextDouble();
+            double y = getDoubleInput(scanner);
 
             List<Double> params = new ArrayList<>();
-            System.out.println("Enter required parameters (separated by space): ");
-            switch (type) {
-                case CIRCLE: {
-                    System.out.print("Radius: ");
-                    params.add(scanner.nextDouble());
-                }
-                break;
-                case RECTANGLE: {
-                    System.out.print("Width: ");
-                    params.add(scanner.nextDouble());
-                    if (type == ShapeType.RECTANGLE) {
-                        System.out.print("Height: ");
-                        params.add(scanner.nextDouble());
-                    }
-                }
-                break;
-
-                case SQUARE: {
-                    System.out.print("Width: ");
-                    params.add(scanner.nextDouble());
-                    if (type == ShapeType.RECTANGLE) {
-                        System.out.print("Height: ");
-                        params.add(scanner.nextDouble());
-                    }
-                }
-                break;
-                case TRIANGLE: {
-                    System.out.print("Side Length: ");
-                    params.add(scanner.nextDouble());
-                    System.out.print("Number of Sides: ");
-                    params.add(scanner.nextDouble());
-                }
-                break;
-                case REGULARPOLYGON: {
-                    System.out.print("Side Length: ");
-                    params.add(scanner.nextDouble());
-                    System.out.print("Number of Sides: ");
-                    params.add(scanner.nextDouble());
-                }
-                break;
+            if (null != type) switch (type) {
+                case CIRCLE:
+                    System.out.print("Enter Radius: ");
+                    params.add(getDoubleInput(scanner));
+                    break;
+                case RECTANGLE:
+                    System.out.print("Enter Width: ");
+                    params.add(getDoubleInput(scanner));
+                    System.out.print("Enter Height: ");
+                    params.add(getDoubleInput(scanner));
+                    break;
+                case SQUARE:
+                    System.out.print("Enter Width: ");
+                    params.add(getDoubleInput(scanner));
+                    break;
+                case TRIANGLE:
+                    System.out.println("!! Treated the origin as x1, y1.");
+                    System.out.print("Enter X2, Y2: ");
+                    double x2 = getDoubleInput(scanner);
+                    double y2 = getDoubleInput(scanner);
+                    System.out.print("Enter X3, Y3: ");
+                    double x3 = getDoubleInput(scanner);
+                    double y3 = getDoubleInput(scanner);
+                    params.addAll(Arrays.asList(new Double[]{x, y, x2, y2, x3, y3}));
+                    break;
+                case REGULARPOLYGON:
+                    System.out.print("Enter Side Length: ");
+                    params.add(getDoubleInput(scanner));
+                    System.out.print("Enter Number of Sides: ");
+                    params.add(getDoubleInput(scanner));
+                    break;
+                default:
+                    break;
             }
             Shape shape = Factory.createShape(type, new Point(x, y), params);
             addShape(shape);
@@ -156,13 +79,35 @@ public class Screen {
         }
     }
 
-    // Get user input for deleting a shape
-    private void deleteShapeFromUser() {
-        System.out.println("Enter shape details to delete:");
-        addShapeFromUser(); // Simulate getting shape input
+    public boolean deleteShape(Shape shape) {
+        boolean removed = shapes.removeIf(entry -> entry.shape.equals(shape));
+        System.out.println(removed ? "Shape deleted." : "Shape not found.");
+        return removed;
     }
 
-    // Get user input for deleting all shapes of a type
+    private void deleteShapeFromUser() {
+        if (shapes.isEmpty()) {
+            System.out.println("No shapes available to delete.");
+            return;
+        }
+
+        System.out.println("Available shapes:");
+        for (int i = 0; i < shapes.size(); i++) {
+            System.out.println((i + 1) + ". " + shapes.get(i).shape);
+        }
+
+        System.out.print("Enter the number of the shape to delete: ");
+        int index = getIntInput(scanner, 1, shapes.size());
+
+        ShapeEntry selectedEntry = shapes.remove(index - 1);
+        System.out.println("Deleted shape: " + selectedEntry.shape);
+    }
+
+    public void deleteShapesByType(ShapeType type) {
+        boolean removed = shapes.removeIf(entry -> entry.shape.getType() == type);
+        System.out.println(removed ? "All shapes of type " + type + " deleted." : "No shapes of type " + type + " found.");
+    }
+
     private void deleteShapesByTypeFromUser() {
         System.out.println("Available shapes: " + Arrays.toString(ShapeType.values()));
         System.out.print("Enter shape type to delete: ");
@@ -174,21 +119,57 @@ public class Screen {
         }
     }
 
-    // Get user input for displaying sorted shapes
+    public void displaySortedShapes(Comparator<ShapeEntry> comparator) {
+        List<ShapeEntry> sortedEntries = shapes.stream()
+                .sorted(comparator)
+                .collect(Collectors.toList());
+
+        if (sortedEntries.isEmpty()) {
+            System.out.println("No shapes to display.");
+        } else {
+            sortedEntries.forEach(entry -> System.out.println(entry.shape));
+        }
+    }
+
     private void displayShapesSorted() {
         System.out.println("Sort by: 1. Area  2. Perimeter  3. Timestamp  4. Origin Distance");
         int option = getIntInput(scanner, 1, 4);
-        Comparator<Shape> comparator = null;
+        Comparator<ShapeEntry> comparator = null;
+
         switch (option) {
-            case 1: comparator = sortByArea(); break;
-            case 2: comparator = sortByPerimeter(); break;
-            case 3: comparator = sortByTimestamp(); break;
-            case 4: comparator = sortByOriginDistance(); break;
-        };
+            case 1:
+                comparator = Comparator.comparingDouble(entry -> entry.shape.getArea());
+                break;
+            case 2:
+                comparator = Comparator.comparingDouble(entry -> entry.shape.getPerimeter());
+                break;
+            case 3:
+                comparator = Comparator.comparingLong(entry -> entry.timestamp);
+                break;
+            case 4:
+                comparator = Comparator.comparingDouble(entry -> entry.shape.getOrigin().distanceTo(new Point(0, 0)));
+                break;
+            default:
+                break;
+        }
+
         if (comparator != null) {
             displaySortedShapes(comparator);
         } else {
             System.out.println("Invalid choice!");
+        }
+    }
+
+    public void findShapesEnclosingPoint(Point p) {
+        List<Shape> enclosingShapes = shapes.stream()
+                .map(entry -> entry.shape)
+                .filter(shape -> shape.isPointEnclosed(p))
+                .collect(Collectors.toList());
+
+        if (enclosingShapes.isEmpty()) {
+            System.out.println("No shapes enclosing the given point.");
+        } else {
+            enclosingShapes.forEach(System.out::println);
         }
     }
 
@@ -200,38 +181,25 @@ public class Screen {
         findShapesEnclosingPoint(new Point(x, y));
     }
 
-    /**
-     * This Function is to get a valid integer input in the given range.
-     * @param sc
-     * @param min
-     * @param max
-     * @return valid integer.
-     */
-    public static int getIntInput(Scanner sc, int min, int max){
-        int num;
-        while(true){
-            try{
-                num = sc.nextInt();
+    public static int getIntInput(Scanner sc, int min, int max) {
+        while (true) {
+            try {
+                int num = sc.nextInt();
                 sc.nextLine();
-                if(num >= min && num <= max)return num;
-                else System.out.println("Enter a valid number between " + min + " & " + max);
-            }catch(Exception e){
+                if (num >= min && num <= max) return num;
+                System.out.println("Enter a valid number between " + min + " & " + max);
+            } catch (Exception e) {
                 System.out.println("Enter a valid number between " + min + " & " + max);
                 sc.nextLine();
             }
         }
     }
 
-    /**
-     * This Function is to get a valid double input.
-     * @param sc
-     * @return valid double value.
-     */
-    public static double getDoubleInput(Scanner sc){
-        while(true){
-            if(sc.hasNextDouble()){
+    public static double getDoubleInput(Scanner sc) {
+        while (true) {
+            if (sc.hasNextDouble()) {
                 return sc.nextDouble();
-            }else{
+            } else {
                 System.out.println("Enter a valid decimal number");
                 sc.nextLine();
             }
@@ -249,20 +217,32 @@ public class Screen {
             System.out.println("4. Display Shapes (Sorted)");
             System.out.println("5. Find Shapes Enclosing a Point");
             System.out.println("6. Exit");
-            System.out.println("\n----------------------------------");
+            System.out.println("----------------------------------");
             System.out.print("Enter your choice: ");
             int choice = getIntInput(sc, 1, 6);
 
             switch (choice) {
-                case 1: screen.addShapeFromUser(); break;
-                case 2: screen.deleteShapeFromUser(); break;
-                case 3: screen.deleteShapesByTypeFromUser(); break;
-                case 4: screen.displayShapesSorted(); break;
-                case 5: screen.findShapesEnclosingPointFromUser(); break;
-                case 6: 
+                case 1:
+                    screen.addShapeFromUser();
+                    break;
+                case 2:
+                    screen.deleteShapeFromUser();
+                    break;
+                case 3:
+                    screen.deleteShapesByTypeFromUser();
+                    break;
+                case 4:
+                    screen.displayShapesSorted();
+                    break;
+                case 5:
+                    screen.findShapesEnclosingPointFromUser();
+                    break;
+                case 6:
                     System.out.println("Exiting...");
                     return;
-                default: System.out.println("Invalid choice! Try again.");
+                default:
+                    System.out.println("Invalid choice! Try again.");
+                    break;
             }
         }
     }

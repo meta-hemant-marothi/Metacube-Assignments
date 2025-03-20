@@ -32,7 +32,7 @@ public class RegularPolygon implements Shape {
 
     @Override
     public boolean isPointEnclosed(Point p) {
-        return false; // Implement logic if needed
+        return false;
     }
 
     @Override
