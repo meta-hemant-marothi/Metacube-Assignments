@@ -43,9 +43,7 @@ The main entities in the system are:
   - `ShopperID` in `ShippingAddress`  
 
 #### 4. ER Diagram  
-*(Attach the ER diagram image here or use a code block if using Markdown-supported diagram syntax.)*  
-
----
+![ER Diagram][ER_Diagram.png]
 
 ### Assignment 2: Normalization  
 
