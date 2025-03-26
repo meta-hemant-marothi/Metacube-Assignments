@@ -1,68 +1,87 @@
+-- DROP and CREATE Database
 DROP DATABASE IF EXISTS StoreFront;
 CREATE DATABASE StoreFront;
 USE StoreFront;
 
+-- User Table
 CREATE TABLE User (
     UserId INT PRIMARY KEY AUTO_INCREMENT,
     Name VARCHAR(50) NOT NULL,
     Email VARCHAR(100) NOT NULL UNIQUE,
-    Password VARCHAR(255) NOT NULL,
-    Role ENUM("Shopper", "Administrator") NOT NULL
+    Password VARCHAR(100) NOT NULL,
+    Role ENUM('Shopper', 'Administrator') NOT NULL,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
 );
 
+-- Category Table
 CREATE TABLE Category (
     CategoryId INT PRIMARY KEY AUTO_INCREMENT,
-    ParentCategoryId INT,
     Name VARCHAR(100) NOT NULL,
-    FOREIGN KEY (ParentCategoryId) REFERENCES Category(CategoryId) ON DELETE CASCADE
+    ParentCategoryId INT,
+    FOREIGN KEY (ParentCategoryId) REFERENCES Category(CategoryId) ON DELETE SET NULL,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
 );
 
+-- Product Table
 CREATE TABLE Product (
     ProductId INT PRIMARY KEY AUTO_INCREMENT,
     Name VARCHAR(50) NOT NULL,
-    Description VARCHAR(255),
-    StockQuantity INT UNSIGNED DEFAULT 0,
-    Price DECIMAL(10,2) NOT NULL,
-    CategoryId INT,
-    FOREIGN KEY (CategoryId) REFERENCES Category(CategoryId) ON DELETE SET NULL
+    Description VARCHAR(100),
+    StockQuantity INT DEFAULT 0 CHECK (StockQuantity >= 0),
+    Price DECIMAL(10, 2) NOT NULL CHECK (Price >= 0),
+    ActiveStatus BOOLEAN DEFAULT TRUE,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
 );
 
+-- ProductCategory Table (Many-to-Many Relationship between Product and Category)
+CREATE TABLE ProductCategory (
+    ProductCategoryId INT PRIMARY KEY AUTO_INCREMENT,
+    ProductId INT NOT NULL,
+    CategoryId INT NOT NULL,
+    FOREIGN KEY (ProductId) REFERENCES Product(ProductId) ON DELETE CASCADE,
+    FOREIGN KEY (CategoryId) REFERENCES Category(CategoryId) ON DELETE CASCADE
+);
+
+-- Image Table
 CREATE TABLE Image (
     ImageId INT PRIMARY KEY AUTO_INCREMENT,
-    ProductId INT,
-    URL VARCHAR(255) NOT NULL,
+    ProductId INT NOT NULL,
+    URL VARCHAR(100) NOT NULL,
     FOREIGN KEY (ProductId) REFERENCES Product(ProductId) ON DELETE CASCADE
 );
 
+-- ShippingAddress Table
 CREATE TABLE ShippingAddress (
     ShippingAddressId INT PRIMARY KEY AUTO_INCREMENT,
-    ShopperId INT,
+    ShopperId INT NOT NULL,
     ZipCode VARCHAR(10) NOT NULL,
     State VARCHAR(50) NOT NULL,
     City VARCHAR(50) NOT NULL,
     AddressDesc TEXT,
-    FOREIGN KEY (ShopperId) REFERENCES User(UserId) ON DELETE CASCADE
+    FOREIGN KEY (ShopperId) REFERENCES User(UserId)
 );
 
+-- Orders Table
 CREATE TABLE Orders (
     OrderId INT PRIMARY KEY AUTO_INCREMENT,
-    ShopperId INT,
-    ShippingAddressId INT,
-    OrderTimestamp DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    Status ENUM("Placed", "Accepted", "Shipped", "Delivered", "Returned", "Replaced", "Cancelled") DEFAULT "Placed",
-    FOREIGN KEY (ShopperId) REFERENCES User(UserId) ON DELETE CASCADE,
-    FOREIGN KEY (ShippingAddressId) REFERENCES ShippingAddress(ShippingAddressId) ON DELETE SET NULL
+    ShopperId INT NOT NULL,
+    ShippingAddressId INT NOT NULL,
+    OrderTimestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Status ENUM('Placed', 'Accepted', 'Shipped', 'Delivered', 'Returned', 'Replaced', 'Cancelled') NOT NULL,
+    FOREIGN KEY (ShopperId) REFERENCES User(UserId),
+    FOREIGN KEY (ShippingAddressId) REFERENCES ShippingAddress(ShippingAddressId)
 );
 
+-- OrderItem Table
 CREATE TABLE OrderItem (
     OrderItemId INT PRIMARY KEY AUTO_INCREMENT,
-    OrderId INT,
-    ProductId INT,
-    Quantity INT UNSIGNED NOT NULL DEFAULT 1,
-    PriceAtPurchase DECIMAL(10,2) NOT NULL,
-    Status ENUM("Placed", "Accepted", "Shipped", "Delivered", "Returned", "Replaced", "Cancelled") DEFAULT "Placed",
+    OrderId INT NOT NULL,
+    ProductId INT NOT NULL,
+    Quantity INT DEFAULT 1 CHECK (Quantity > 0),
+    Status ENUM('Placed', 'Accepted', 'Shipped', 'Delivered', 'Returned', 'Replaced', 'Cancelled') NOT NULL,
     FOREIGN KEY (OrderId) REFERENCES Orders(OrderId) ON DELETE CASCADE,
-    FOREIGN KEY (ProductId) REFERENCES Product(ProductId) ON DELETE CASCADE
+    FOREIGN KEY (ProductId) REFERENCES Product(ProductId)
 );
-
-

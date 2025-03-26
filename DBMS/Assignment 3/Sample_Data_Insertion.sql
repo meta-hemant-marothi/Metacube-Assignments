@@ -31,8 +31,8 @@ INSERT INTO Product (Name, Description, StockQuantity, Price, ActiveStatus) VALU
 ('Wireless Mouse', 'Ergonomic wireless mouse', 20, 1499.00, TRUE),
 ('T-Shirt', 'Cotton round neck t-shirt', 50, 499.00, TRUE),
 ('Jeans', 'Slim fit blue jeans', 30, 1299.00, TRUE),
-('Blender', 'Multi-speed kitchen blender', 15, 2999.00, FALSE),
-('Smartwatch', 'Latest smartwatch with fitness tracking', 8, 19999.00, FALSE),
+('Blender', 'Multi-speed kitchen blender', 15, 2999.00, TRUE),
+('Smartwatch', 'Latest smartwatch with fitness tracking', 8, 19999.00, TRUE),
 ('Tablet', '10-inch tablet with 4GB RAM', 6, 15999.00, TRUE),
 ('Headphones', 'Noise-cancelling over-ear headphones', 12, 9999.00, TRUE),
 ('Sneakers', 'Running shoes with breathable fabric', 25, 3499.00, TRUE);
@@ -98,3 +98,21 @@ INSERT INTO OrderItem (OrderId, ProductId, Quantity, Status) VALUES
 (8, 8, 1, 'Placed'),
 (9, 9, 2, 'Accepted'),
 (10, 10, 1, 'Shipped');
+
+-- Insert Sample Data: State Table
+INSERT INTO State (StateName) VALUES 
+('Rajasthan'), ('Karnataka'), ('Delhi'), ('Maharashtra'),
+('Tamil Nadu'), ('West Bengal'), ('Telangana'), 
+('Gujarat'), ('Odisha');
+
+-- Insert Sample Data: City Table
+INSERT INTO City (CityName, StateId) VALUES
+('Jaipur', 1), ('Bangalore', 2), ('New Delhi', 3),
+('Mumbai', 4), ('Chennai', 5), ('Kolkata', 6),
+('Hyderabad', 7), ('Ahmedabad', 8), ('Bhubaneswar', 9);
+
+-- Insert Sample Data: ZipCode Table
+INSERT INTO ZipCode (ZipCode, CityId) VALUES
+('302001', 1), ('560001', 2), ('110001', 3),
+('400001', 4), ('600001', 5), ('700001', 6),
+('500001', 7), ('380001', 8), ('751001', 9);

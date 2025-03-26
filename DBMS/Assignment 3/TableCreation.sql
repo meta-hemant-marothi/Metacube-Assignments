@@ -105,9 +105,3 @@ CREATE TABLE ZipCode (
     CityId INT NOT NULL,
     FOREIGN KEY (CityId) REFERENCES City(CityId)
 );
-
-
-ALTER TABLE ProductCategory DROP FOREIGN KEY productcategory_ibfk_1;
-ALTER TABLE Image DROP FOREIGN KEY image_ibfk_1;
-ALTER TABLE OrderItem DROP FOREIGN KEY orderitem_ibfk_2;
-DROP TABLE Product;

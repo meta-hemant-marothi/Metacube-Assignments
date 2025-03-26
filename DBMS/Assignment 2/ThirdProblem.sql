@@ -1,74 +1,60 @@
-USE StoreFront;
-
--- 1. Display the 50 most recent orders with Id, Order Date, and Order Total
-SELECT 
-    o.OrderId, 
-    o.OrderTimestamp, 
-    SUM(oi.Quantity * oi.PriceAtPurchase) AS OrderTotal
-FROM Orders o
-JOIN OrderItem oi ON o.OrderId = oi.OrderId
-GROUP BY o.OrderId, o.OrderTimestamp
-ORDER BY o.OrderTimestamp DESC
+-- Display Recent 50 Orders
+SELECT OrderId AS Id, OrderTimestamp AS OrderDate,
+       (SELECT SUM(Price * Quantity)
+        FROM OrderItem
+        JOIN Product ON OrderItem.ProductId = Product.ProductId
+        WHERE OrderItem.OrderId = Orders.OrderId) AS OrderTotal
+FROM Orders
+ORDER BY OrderTimestamp DESC
 LIMIT 50;
 
--- 2. Display the 10 most expensive orders
-SELECT 
-    o.OrderId, 
-    SUM(oi.Quantity * oi.PriceAtPurchase) AS OrderTotal
-FROM Orders o
-JOIN OrderItem oi ON o.OrderId = oi.OrderId
-GROUP BY o.OrderId
+-- Display 10 Most Expensive Orders
+SELECT OrderId, OrderTimestamp AS OrderDate,
+       (SELECT SUM(Price * Quantity)
+        FROM OrderItem
+        JOIN Product ON OrderItem.ProductId = Product.ProductId
+        WHERE OrderItem.OrderId = Orders.OrderId) AS OrderTotal
+FROM Orders
 ORDER BY OrderTotal DESC
 LIMIT 10;
 
--- 3. Display orders placed more than 10 days ago with at least one item still not shipped
-SELECT DISTINCT o.OrderId, o.OrderTimestamp, o.Status 
-FROM Orders o
-JOIN OrderItem oi ON o.OrderId = oi.OrderId
-WHERE o.OrderTimestamp < NOW() - INTERVAL 10 DAY
-AND oi.Status NOT IN ('Shipped', 'Delivered', 'Cancelled');
+-- Orders Older than 10 Days with Items Not Yet Shipped
+SELECT Orders.OrderId, Orders.OrderTimestamp AS OrderDate
+FROM Orders
+WHERE Orders.OrderTimestamp < (NOW() - INTERVAL 10 DAY)
+AND EXISTS (
+    SELECT 1
+    FROM OrderItem
+    WHERE OrderItem.OrderId = Orders.OrderId AND OrderItem.Status != 'Shipped'
+);
 
--- 4. Display shoppers who haven't placed any order in the last month
-SELECT u.UserId, u.Name, u.Email 
-FROM User u
-LEFT JOIN Orders o ON u.UserId = o.ShopperId 
-    AND o.OrderTimestamp >= NOW() - INTERVAL 1 MONTH
-WHERE o.OrderId IS NULL AND u.Role = 'Shopper';
+-- Shoppers Who Haven’t Ordered Anything Since Last Month
+SELECT UserId, Name
+FROM User
+WHERE Role = 'Shopper'
+AND UserId NOT IN (
+    SELECT ShopperId
+    FROM Orders
+    WHERE OrderTimestamp > (NOW() - INTERVAL 1 MONTH)
+);
 
--- 5. Display shoppers along with orders they placed in the last 15 days
-SELECT 
-    u.UserId, 
-    u.Name AS ShopperName, 
-    o.OrderId, 
-    o.OrderTimestamp 
-FROM User u
-JOIN Orders o ON u.UserId = o.ShopperId
-WHERE o.OrderTimestamp >= NOW() - INTERVAL 15 DAY
-ORDER BY o.OrderTimestamp DESC;
+-- Shoppers with Orders in the Last 15 Days
+SELECT User.UserId, User.Name, COUNT(Orders.OrderId) AS RecentOrders
+FROM User
+LEFT JOIN Orders ON User.UserId = Orders.ShopperId
+WHERE Orders.OrderTimestamp > (NOW() - INTERVAL 15 DAY)
+GROUP BY User.UserId, User.Name;
 
--- 6. Display list of order items that are in “shipped” state for a particular OrderId (e.g., 1020)
-SELECT 
-    oi.OrderItemId, 
-    oi.OrderId, 
-    p.Name AS ProductName, 
-    oi.Quantity, 
-    oi.PriceAtPurchase, 
-    oi.Status
-FROM OrderItem oi
-JOIN Product p ON oi.ProductId = p.ProductId
-WHERE oi.OrderId = 1020 
-AND oi.Status = 'Shipped';
+-- Order Items in "Shipped" State for a Specific Order (Example: Order Id = 1020)
+SELECT OrderItemId, ProductId, Quantity, Status
+FROM OrderItem
+WHERE OrderId = 1020 AND Status = 'Shipped';
 
--- 7. Display order items along with order placed date for items with price between Rs 20 and Rs 50
-SELECT 
-    oi.OrderItemId, 
-    oi.OrderId, 
-    o.OrderTimestamp, 
-    p.Name AS ProductName, 
-    oi.Quantity, 
-    oi.PriceAtPurchase
-FROM OrderItem oi
-JOIN Orders o ON oi.OrderId = o.OrderId
-JOIN Product p ON oi.ProductId = p.ProductId
-WHERE oi.PriceAtPurchase BETWEEN 20 AND 50
-ORDER BY o.OrderTimestamp DESC;
+-- Order Items (with Order Date) Priced Between Rs 20 and Rs 50
+SELECT OrderItem.OrderItemId, Product.Name AS ProductTitle,
+       Product.Price, OrderItem.Quantity, OrderItem.Status,
+       Orders.OrderTimestamp AS OrderDate
+FROM OrderItem
+JOIN Product ON OrderItem.ProductId = Product.ProductId
+JOIN Orders ON OrderItem.OrderId = Orders.OrderId
+WHERE Product.Price BETWEEN 20 AND 50;
