@@ -48,7 +48,8 @@ INSERT INTO ProductCategory (ProductId, CategoryId) VALUES
 (7, 4), -- Smartwatch in Accessories
 (8, 2), -- Tablet in Mobile
 (9, 4), -- Headphones in Accessories
-(10, 7); -- Sneakers in Women
+(10, 7), -- Sneakers in Women
+(1, 4);
 
 -- Insert Sample Data: Image Table
 INSERT INTO Image (ProductId, URL) VALUES
