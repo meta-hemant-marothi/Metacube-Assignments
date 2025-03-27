@@ -75,7 +75,7 @@ INSERT INTO ShippingAddress (ShopperId, ZipCode, State, City, AddressDesc) VALUE
 (3, '751001', 'Odisha', 'Bhubaneswar', '707, YZA Colony');
 
 -- Insert Sample Data: Orders Table
-INSERT INTO Orders (ShopperId, ShippingAddressId, Status) VALUES
+INSERT INTO Orders (ShopperId, ShippingAddressId, Status, OrderTimestamp) VALUES
 (1, 1, 'Placed'),
 (3, 2, 'Accepted'),
 (4, 3, 'Shipped'),
@@ -88,17 +88,19 @@ INSERT INTO Orders (ShopperId, ShippingAddressId, Status) VALUES
 (3, 10, 'Shipped');
 
 -- Insert Sample Data: OrderItem Table
-INSERT INTO OrderItem (OrderId, ProductId, Quantity, Status) VALUES
-(1, 1, 1, 'Placed'),
-(2, 2, 1, 'Accepted'),
-(3, 3, 2, 'Shipped'),
-(4, 4, 3, 'Delivered'),
-(5, 5, 1, 'Returned'),
-(6, 6, 2, 'Replaced'),
-(7, 7, 1, 'Cancelled'),
-(8, 8, 1, 'Placed'),
-(9, 9, 2, 'Accepted'),
-(10, 10, 1, 'Shipped');
+INSERT INTO OrderItem (ProductId, Quantity, Status) VALUES
+(1, 1, 'Placed'),
+(2, 1, 'Accepted'),
+(3, 1, 'Shipped'),
+(4, 30, 'Delivered'),
+(5, 1, 'Returned'),
+(4, 9, 'Delivered'),
+(4, 12, 'Delivered'),
+(6, 2, 'Replaced'),
+(7, 1, 'Cancelled'),
+(8, 1, 'Placed'),
+(9, 2, 'Accepted'),
+(10, 1, 'Shipped');
 
 -- Insert Sample Data: State Table
 INSERT INTO State (StateName) VALUES 
