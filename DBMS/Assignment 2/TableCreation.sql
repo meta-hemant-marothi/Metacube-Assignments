@@ -11,7 +11,7 @@ CREATE TABLE User (
     Password VARCHAR(100) NOT NULL,
     Role ENUM('Shopper', 'Administrator') NOT NULL,
     CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-    UpdatedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
+    UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 -- Category Table
@@ -33,7 +33,7 @@ CREATE TABLE Product (
     Price DECIMAL(10, 2) NOT NULL CHECK (Price >= 0),
     ActiveStatus BOOLEAN DEFAULT TRUE,
     CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-    UpdatedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
+    UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 -- ProductCategory Table (Many-to-Many Relationship between Product and Category)
@@ -41,7 +41,7 @@ CREATE TABLE ProductCategory (
     ProductCategoryId INT PRIMARY KEY AUTO_INCREMENT,
     ProductId INT NOT NULL,
     CategoryId INT NOT NULL,
-    FOREIGN KEY (ProductId) REFERENCES Product(ProductId) ON DELETE CASCADE,
+    FOREIGN KEY (ProductId) REFERENCES Product(ProductId),
     FOREIGN KEY (CategoryId) REFERENCES Category(CategoryId) ON DELETE CASCADE
 );
 
@@ -50,7 +50,7 @@ CREATE TABLE Image (
     ImageId INT PRIMARY KEY AUTO_INCREMENT,
     ProductId INT NOT NULL,
     URL VARCHAR(100) NOT NULL,
-    FOREIGN KEY (ProductId) REFERENCES Product(ProductId) ON DELETE CASCADE
+    FOREIGN KEY (ProductId) REFERENCES Product(ProductId)
 );
 
 -- ShippingAddress Table
@@ -69,7 +69,7 @@ CREATE TABLE Orders (
     OrderId INT PRIMARY KEY AUTO_INCREMENT,
     ShopperId INT NOT NULL,
     ShippingAddressId INT NOT NULL,
-    OrderTimestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    OrderTimestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     Status ENUM('Placed', 'Accepted', 'Shipped', 'Delivered', 'Returned', 'Replaced', 'Cancelled') NOT NULL,
     FOREIGN KEY (ShopperId) REFERENCES User(UserId),
     FOREIGN KEY (ShippingAddressId) REFERENCES ShippingAddress(ShippingAddressId)

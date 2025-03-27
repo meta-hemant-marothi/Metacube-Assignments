@@ -25,7 +25,7 @@ WHERE Orders.OrderTimestamp < (NOW() - INTERVAL 10 DAY)
 AND EXISTS (
     SELECT 1
     FROM OrderItem
-    WHERE OrderItem.OrderId = Orders.OrderId AND OrderItem.Status != 'Shipped'
+    WHERE OrderItem.OrderId = Orders.OrderId AND OrderItem.Status = 'Placed'
 );
 
 -- Shoppers Who Haven’t Ordered Anything Since Last Month
