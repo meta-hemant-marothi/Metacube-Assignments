@@ -19,5 +19,3 @@ CREATE TABLE Product (
 ALTER TABLE ProductCategory ADD FOREIGN KEY (ProductId) REFERENCES Product(ProductId);
 ALTER TABLE Image ADD FOREIGN KEY(ProductId) REFERENCES Product(ProductId);
 ALTER TABLE OrderItem ADD FOREIGN KEY(ProductId) REFERENCES Product(ProductId);
-
-SHOW CREATE TABLE ProductCategory;
