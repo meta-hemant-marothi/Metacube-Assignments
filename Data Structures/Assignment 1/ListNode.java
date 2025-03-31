@@ -43,20 +43,20 @@ public class ListNode {
     }
 
     public static void rotateSubLinkedList(ListNode head, int leftPosition, int rightPosition, int numberOfSteps) {
-        if (head == null || leftPosition == rightPosition) {
-            displayList(head);
+        if (head == null || leftPosition >= rightPosition) {
             return;
         }
     
-        // Step 1: Create a dummy node for easier manipulation
+        // Dummy node to handle cases where leftPosition == 1
         ListNode dummy = new ListNode(0);
         dummy.setNext(head);
-    
-        // Step 2: Find the previous node of the sublist and the sublist's head
         ListNode temp = dummy;
+    
+        // Step 1: Find the node before the sublist
         for (int i = 1; i < leftPosition; i++) {
-            if (temp == null) {
-                throw new AssertionError("Not enough elements.");
+            if (temp.getNext() == null) {
+                System.out.println("Left position out of bounds.");
+                return;
             }
             temp = temp.getNext();
         }
@@ -64,28 +64,46 @@ public class ListNode {
         ListNode subListPrev = temp;
         ListNode subListHead = subListPrev.getNext();
     
-        // Step 3: Traverse to the tail of the sublist
+        if (subListHead == null) {
+            System.out.println("Sublist head is null.");
+            return;
+        }
+    
+        // Step 2: Find the tail of the sublist
         ListNode subListTail = subListHead;
         int subListSize = rightPosition - leftPosition + 1;
-        numberOfSteps %= subListSize; // Handle cases where steps > sublist size
+        numberOfSteps %= subListSize; // Optimize step count
+    
+        if (numberOfSteps == 0) {
+            displayList(dummy.getNext());
+            return;
+        }
+    
         for (int i = 1; i < subListSize; i++) {
+            if (subListTail.getNext() == null) {
+                System.out.println("Right position out of bounds.");
+                return;
+            }
             subListTail = subListTail.getNext();
         }
         ListNode subListTailNext = subListTail.getNext();
     
-        // Step 4: Find the new head and tail after rotation
+        // Step 3: Find the new tail and new head after rotation
         ListNode newTail = subListHead;
         for (int i = 1; i < subListSize - numberOfSteps; i++) {
             newTail = newTail.getNext();
         }
         ListNode newHead = newTail.getNext();
     
-        // Step 5: Reconnect the sublist nodes
+        // Step 4: Reconnect the sublist
         subListPrev.setNext(newHead);
-        newTail.setNext(subListTailNext);
         subListTail.setNext(subListHead);
+        newTail.setNext(subListTailNext);
     
-        // Display the updated list
+        // Print the modified list
         displayList(dummy.getNext());
     }
+    
+    
+
 }
