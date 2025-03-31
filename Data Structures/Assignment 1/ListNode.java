@@ -28,6 +28,11 @@ public class ListNode {
         this.next = next;
     }
 
+    @Override
+    public String toString(){
+        return "" + this.value;
+    }
+
     public static void displayList(ListNode head){
         System.out.println("======== Linked List ========");
         while(head != null){
@@ -37,36 +42,50 @@ public class ListNode {
         System.out.println("null");
     }
 
-    public static void rotateSubLinkedList(ListNode head, int leftPosition, int rightPosition, int numberOfSteps){
-        if (head == null || leftPosition <= 0 || rightPosition <= 0 || leftPosition > rightPosition) {
-            System.out.println("Invalid input positions!");
+    public static void rotateSubLinkedList(ListNode head, int leftPosition, int rightPosition, int numberOfSteps) {
+        if (head == null || leftPosition == rightPosition) {
+            displayList(head);
             return;
         }
-
-        ListNode pointerToLeftPosition = head, pointerToRightPosition, pointerToRotatingPosition;
-        int sizeOfSubList = rightPosition - leftPosition + 1;
-        numberOfSteps %= sizeOfSubList;
-        int iterator = 0;
-        
-        while(iterator < leftPosition - 2){
-            pointerToLeftPosition = pointerToLeftPosition.getNext();
-            iterator += 1;
+    
+        // Step 1: Create a dummy node for easier manipulation
+        ListNode dummy = new ListNode(0);
+        dummy.setNext(head);
+    
+        // Step 2: Find the previous node of the sublist and the sublist's head
+        ListNode temp = dummy;
+        for (int i = 1; i < leftPosition; i++) {
+            if (temp == null) {
+                throw new AssertionError("Not enough elements.");
+            }
+            temp = temp.getNext();
         }
-        pointerToRotatingPosition = pointerToLeftPosition;
-        while (iterator < numberOfSteps + leftPosition - 1 && pointerToRotatingPosition != null) {
-            pointerToRotatingPosition = pointerToRotatingPosition.getNext();
-            iterator++;
+    
+        ListNode subListPrev = temp;
+        ListNode subListHead = subListPrev.getNext();
+    
+        // Step 3: Traverse to the tail of the sublist
+        ListNode subListTail = subListHead;
+        int subListSize = rightPosition - leftPosition + 1;
+        numberOfSteps %= subListSize; // Handle cases where steps > sublist size
+        for (int i = 1; i < subListSize; i++) {
+            subListTail = subListTail.getNext();
         }
-        pointerToRightPosition = pointerToRotatingPosition;
-        while(iterator < rightPosition - 1){
-            pointerToRightPosition = pointerToRightPosition.getNext();
-            iterator += 1;
+        ListNode subListTailNext = subListTail.getNext();
+    
+        // Step 4: Find the new head and tail after rotation
+        ListNode newTail = subListHead;
+        for (int i = 1; i < subListSize - numberOfSteps; i++) {
+            newTail = newTail.getNext();
         }
-        
-        pointerToRightPosition.setNext(pointerToLeftPosition.getNext());
-        pointerToLeftPosition.setNext(pointerToRotatingPosition.getNext());
-        pointerToRotatingPosition.setNext(pointerToRightPosition.getNext());
-        displayList(head);
+        ListNode newHead = newTail.getNext();
+    
+        // Step 5: Reconnect the sublist nodes
+        subListPrev.setNext(newHead);
+        newTail.setNext(subListTailNext);
+        subListTail.setNext(subListHead);
+    
+        // Display the updated list
+        displayList(dummy.getNext());
     }
-
 }
