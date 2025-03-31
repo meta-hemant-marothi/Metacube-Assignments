@@ -48,7 +48,7 @@ public class ListNode {
         numberOfSteps %= sizeOfSubList;
         int iterator = 0;
         
-        while(iterator < leftPosition - 1){
+        while(iterator < leftPosition - 2){
             pointerToLeftPosition = pointerToLeftPosition.getNext();
             iterator += 1;
         }
@@ -63,9 +63,9 @@ public class ListNode {
             iterator += 1;
         }
         
-        pointerToRightPosition = pointerToLeftPosition.getNext();
-        pointerToLeftPosition = pointerToRotatingPosition.getNext();
-        pointerToRotatingPosition = pointerToRightPosition.getNext();
+        pointerToRightPosition.setNext(pointerToLeftPosition.getNext());
+        pointerToLeftPosition.setNext(pointerToRotatingPosition.getNext());
+        pointerToRotatingPosition.setNext(pointerToRightPosition.getNext());
         displayList(head);
     }
 
