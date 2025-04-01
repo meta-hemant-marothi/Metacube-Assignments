@@ -27,7 +27,8 @@ import java.util.Scanner;
                     int right = getValidIntegerInput(scanner);
                     System.out.print("Enter number of steps: ");
                     int steps = getValidIntegerInput(scanner);
-                    ListNode.rotateSubLinkedList(head, left, right, steps);
+                    head = ListNode.rotateSubLinkedList(head, left, right, steps);
+                    ListNode.displayList(head);
                     break;
                 case 4:
                     System.out.println(detectLoop(head) ? "Loop detected!" : "No loop detected.");

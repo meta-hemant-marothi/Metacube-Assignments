@@ -42,68 +42,58 @@ public class ListNode {
         System.out.println("null");
     }
 
-    public static void rotateSubLinkedList(ListNode head, int leftPosition, int rightPosition, int numberOfSteps) {
-        if (head == null || leftPosition >= rightPosition) {
-            return;
-        }
-    
-        // Dummy node to handle cases where leftPosition == 1
-        ListNode dummy = new ListNode(0);
-        dummy.setNext(head);
-        ListNode temp = dummy;
-    
-        // Step 1: Find the node before the sublist
-        for (int i = 1; i < leftPosition; i++) {
-            if (temp.getNext() == null) {
-                System.out.println("Left position out of bounds.");
-                return;
+    public static ListNode rotateSubLinkedList(ListNode head, int leftPosition, int rightPosition, int numberOfSteps){  
+        if (head == null || leftPosition >= rightPosition || rightPosition < 0) {  
+            displayList(head);  
+            return head;  
+        }  
+      
+        int subListSize = rightPosition - leftPosition + 1;  
+        numberOfSteps %= subListSize;  
+        if(numberOfSteps <= 0){  
+            displayList(head);  
+            return head;  
+        }  
+      
+        ListNode dummy = new ListNode(0);  
+        dummy.setNext(head);  
+      
+        // Move temp to one node before the leftPosition  
+        ListNode temp = dummy;  
+        for(int i = 1; i < leftPosition; i++){  
+            if(temp == null){  
+                throw new AssertionError("Not enough elements.");  
+            }  
+            temp = temp.getNext();  
+        }  
+        ListNode subListPrev = temp;  
+        ListNode subListHead = subListPrev.getNext();  
+      
+        // For clockwise rotation, the break point should be at index = subListSize - numberOfSteps  
+        int breakIndex = subListSize - numberOfSteps;  
+        ListNode subListBreakPoint = null;  
+        
+        temp = subListHead;  
+        for(int i = 1; i <= subListSize; i++){  
+            if(i == breakIndex){  
+                subListBreakPoint = temp;  
             }
-            temp = temp.getNext();
-        }
-    
-        ListNode subListPrev = temp;
-        ListNode subListHead = subListPrev.getNext();
-    
-        if (subListHead == null) {
-            System.out.println("Sublist head is null.");
-            return;
-        }
-    
-        // Step 2: Find the tail of the sublist
-        ListNode subListTail = subListHead;
-        int subListSize = rightPosition - leftPosition + 1;
-        numberOfSteps %= subListSize; // Optimize step count
-    
-        if (numberOfSteps == 0) {
-            displayList(dummy.getNext());
-            return;
-        }
-    
-        for (int i = 1; i < subListSize; i++) {
-            if (subListTail.getNext() == null) {
-                System.out.println("Right position out of bounds.");
-                return;
-            }
-            subListTail = subListTail.getNext();
-        }
-        ListNode subListTailNext = subListTail.getNext();
-    
-        // Step 3: Find the new tail and new head after rotation
-        ListNode newTail = subListHead;
-        for (int i = 1; i < subListSize - numberOfSteps; i++) {
-            newTail = newTail.getNext();
-        }
-        ListNode newHead = newTail.getNext();
-    
-        // Step 4: Reconnect the sublist
-        subListPrev.setNext(newHead);
+            if(i < subListSize){  
+                temp = temp.getNext();  
+            }  
+        }  
+        ListNode subListTail = temp;  
+        ListNode subListTailNext = subListTail.getNext();  
+      
+        // Reconnect pointers to perform the rotation  
+        subListPrev.setNext(subListBreakPoint.getNext());
         subListTail.setNext(subListHead);
-        newTail.setNext(subListTailNext);
-    
-        // Print the modified list
-        displayList(dummy.getNext());
-    }
-    
-    
+        subListBreakPoint.setNext(subListTailNext);          
+      
+        // Update head and display the rotated list  
+        head = dummy.getNext();  
 
+        displayList(head);  
+        return head;
+    }
 }
