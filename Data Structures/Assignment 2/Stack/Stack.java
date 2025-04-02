@@ -1,3 +1,5 @@
+package Stack;
+
 public class Stack<T> implements StackInterface<T>{
     private T[] elements;
     private int capacity;
@@ -18,13 +20,12 @@ public class Stack<T> implements StackInterface<T>{
     }
 
     @Override
-    public final boolean push(T value){
-        if(!isFull()){
-            elements[++top] = value;
-            return true;
-        }else{
-            throw new AssertionError("Stack is Full");
+    public final boolean push(T value) {
+        if (isFull()) {
+            increaseCapacity(capacity * 2); // Double the capacity
         }
+        elements[++top] = value;
+        return true;
     }
 
     @Override
@@ -71,6 +72,12 @@ public class Stack<T> implements StackInterface<T>{
             this.elements = newElements;
             this.capacity = newCapacity;
         }
+    }
+
+    @Override
+    public void clear() {
+        elements = (T[]) new Object[capacity];
+        top = -1;
     }
 
     public int getCapacity() {

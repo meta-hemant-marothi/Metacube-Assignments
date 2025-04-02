@@ -1,3 +1,5 @@
+package Stack;
+
 public interface StackInterface<T> {
     public boolean push(T value);
     public T pop();
@@ -6,4 +8,5 @@ public interface StackInterface<T> {
     public int size();
     public boolean isFull();
     public void increaseCapacity(int newCapacity);
+    public void clear();
 }
