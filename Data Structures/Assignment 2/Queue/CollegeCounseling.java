@@ -7,7 +7,8 @@ public class CollegeCounseling {
         programs.put("Engineering", new Program("Engineering", 2));
         programs.put("Medicine", new Program("Medicine", 1));
         programs.put("Arts", new Program("Arts", 2));
-
+        programs.put("Commerce", new Program("Commerce", 2));
+        programs.put("Law", new Program("Law", 1));
         CircularQueue<Student> queue = new CircularQueue<>();
         boolean exit = false;
 
@@ -19,7 +20,6 @@ public class CollegeCounseling {
             System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
 
-            // Validate menu choice
             int choice = validateIntegerInput(scanner);
 
             switch (choice) {
@@ -28,17 +28,15 @@ public class CollegeCounseling {
                     scanner.nextLine(); // Consume leftover newline
                     String name = scanner.nextLine().trim();
 
-                    // Ensure name is not empty
                     if (name.isEmpty()) {
                         System.out.println("Invalid input. Student name cannot be empty.");
                         break;
                     }
 
-                    System.out.print("Enter 5 Program Preferences (comma-separated): " + programs.toString());
+                    System.out.println("Enter 5 Program Preferences (comma-separated): " + programs.keySet() + ":-");
                     String preferencesInput = scanner.nextLine().trim();
                     String[] preferences = preferencesInput.split(",");
 
-                    // Ensure exactly 5 preferences are provided
                     if (preferences.length != 5) {
                         System.out.println("Invalid input. Please enter exactly 5 preferences.");
                         break;
@@ -92,8 +90,8 @@ public class CollegeCounseling {
         }
     
         System.out.println("Students in the queue:");
-        int size = queue.size(); // Get size of the queue
-        int index = queue.getFront(); // Get front index
+        int size = queue.size();
+        int index = queue.getFront();
     
         for (int i = 0; i < size; i++) {
             Student student = queue.getElementAt(index);
@@ -101,6 +99,7 @@ public class CollegeCounseling {
             index = (index + 1) % queue.getCapacity();
         }
     }
+
     // Input validation for integer choices
     private static int validateIntegerInput(Scanner scanner) {
         while (true) {
@@ -108,7 +107,7 @@ public class CollegeCounseling {
                 return scanner.nextInt();
             } else {
                 System.out.println("Invalid input. Please enter a valid integer.");
-                scanner.next(); // Consume invalid input
+                scanner.next();
             }
         }
     }
