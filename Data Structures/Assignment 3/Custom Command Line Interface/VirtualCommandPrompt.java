@@ -100,7 +100,7 @@ public class VirtualCommandPrompt {
         VirtualCommandPrompt vcp = new VirtualCommandPrompt();
         Scanner scanner = new Scanner(System.in);
         System.out.println("::::::::::: Welcome to Metacube Virtual Command Prompt :::::::::");
-
+        
         while (true) {
             System.out.print(vcp.getPath() + "> ");
             String command = scanner.nextLine();

@@ -1,6 +1,6 @@
 import java.util.Comparator;
 
-public class PriorityQueue<T extends Comparable<T>> implements PriorityQueueInterface<T> {
+public class PriorityQueue<T> implements PriorityQueueInterface<T> {
     private final int capacity;
     private int currentSize;
     private final T[] elements;
@@ -11,7 +11,7 @@ public class PriorityQueue<T extends Comparable<T>> implements PriorityQueueInte
         this.currentSize = -1;
         this.capacity = capacity;
         this.comparator = comparator;
-        elements = (T[]) new Comparable[this.capacity];
+        elements = (T[]) new Object[this.capacity];
     }
 
     @Override
@@ -20,7 +20,7 @@ public class PriorityQueue<T extends Comparable<T>> implements PriorityQueueInte
             int index = ++currentSize;
             elements[currentSize] = value;
 
-            while (index > 0 && comparator.compare(elements[getParentIndex(index)], elements[index]) < 0) {
+            while (index > 0 && comparator.compare(elements[getParentIndex(index)], elements[index]) <= 0) {
                 swap(index, getParentIndex(index));
                 index = getParentIndex(index);
             }

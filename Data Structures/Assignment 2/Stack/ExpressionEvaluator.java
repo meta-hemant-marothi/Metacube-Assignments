@@ -1,5 +1,4 @@
 package Stack;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -9,7 +8,6 @@ public class ExpressionEvaluator {
     private final Stack<Double> operandStack = new Stack<>();
     private final Stack<String> operatorStack = new Stack<>();
 
-    // Method to evaluate an infix expression
     public double evaluateInfixExpression(String expression, Map<String, Double> variables) {
         String[] tokens = expression.split("\\s+");
 
