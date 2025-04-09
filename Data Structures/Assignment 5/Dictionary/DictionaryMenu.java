@@ -32,7 +32,7 @@ public class DictionaryMenu {
         }
     }
     public static void main(String[] args) {
-        DictionayBST<Integer, String> bst = new DictionayBST<>();
+        DictionaryBST<Integer, String> bst = new DictionaryBST<>();
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
 
@@ -41,7 +41,7 @@ public class DictionaryMenu {
             System.out.println("1. Add key-value pair");
             System.out.println("2. Get value by key");
             System.out.println("3. Delete key-value pair");
-            System.out.println("4. Display all key-value pairs");
+            System.out.println("4. Display all key-value pairs in sorted order");
             System.out.println("5. Exit");
 
             // Use validation function for choice input
