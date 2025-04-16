@@ -17,7 +17,7 @@
             if(employee.getSalary() != this.getSalary()){
                 return (this.getSalary() - employee.getSalary()) < 0 ? -1 : 1;
             }else if(employee.getAge() != this.getAge()){
-                return (this.getAge() - employee.getAge()) < 0 ? -1 : 1;
+                return (this.getAge() - employee.getAge()) < 0 ? 1 : -1;
             }
             return 0;
         }

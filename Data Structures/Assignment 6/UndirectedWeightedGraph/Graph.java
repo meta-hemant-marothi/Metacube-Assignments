@@ -97,6 +97,9 @@ public class Graph implements UndirectedWeightedGraph {
                 union(edge.src, edge.dest);
             }
         }
+        if(mstEdges.size() <= numNodes - 1){
+            throw new AssertionError("No Valid MST for this graph.");
+        }
         return mstEdges;
     }
 

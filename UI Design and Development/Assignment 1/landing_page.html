@@ -4,26 +4,144 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metacube Car Parking</title>
+    <style>
+        body {
+            background-image: url("pexels-iriser-1379636.jpg"); /* Path to your image */
+            background-size: cover; /* Makes the image cover the entire page */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            background-position: center; /* Centers the image */
+        }
+        nav{
+            position: sticky;
+            z-index: 1000;
+            top: 0;
+            padding: 20px;
+            margin: 10px;
+            background-color: aliceblue;
+            display: flex;
+            justify-content: space-around;
+            border-radius: 20cm;
+            flex-wrap: wrap;
+        }
+        .navbar-items{
+            text-decoration: none;
+            color: black;
+            margin: 10px;
+        }
+
+        div{
+            background-color: aliceblue;
+            opacity: 85%;
+            border-radius: 10px;
+            margin: 15px;
+            padding: 15px;
+        }
+    </style>
+        
 </head>
-<style>
-    .navbar-items{
-        a;
-    }
-</style>
+
 <body>
     <nav>
-        <div class="navbar-items">
-            <a href="#">Add Employee</a>
-        </div>
-        <div class="navbar-items">
-            <a href="#">Add Vehicle</a>
-        </div>
-        <div class="navbar-items">
-            <a href="#">Give Feedback</a>
-        </div>
-        <div class="navbar-items">
-            <a href="#">Pricing</a>
-        </div>
+        <a href="landing_page.html"><img src="https://europe.metacube.com/wp-content/uploads/2022/04/cropped-LogoMetacube_2786-1.png" height="30" width="90"></a>
+        <a href="#Add-Employee" class="navbar-items">Add Employee</a>
+        <a href="#Add-Vehicle" class="navbar-items">Add Vehicle</a>
+        <a href="#Give-Feedback" class="navbar-items">Give Feedback</a>
+        <a href="#Pricing" class="navbar-items">Pricing</a>
     </nav>
+    <div id="Add-Employee">
+        <h2 style="display: flex; justify-content: center;">Add Employee</h2>
+        <form method="get">
+            <div>
+                <label for="name">Name: </label>
+                <input type="text" name="name" placeholder="Enter full name" required>
+            </div>
+            <div>
+                <label for="email">Email: </label>
+                <input type="email" name="email" placeholder="Enter your mail" required>
+            </div>
+            <div>
+                <label for="password">Password: </label>
+                <input type="password" name="password" placeholder="Enter your password" required>
+                <label for="confirm_password">Confirm Password: </label>
+                <input type="password" name="confirm_password" placeholder="Confirm your password" required>
+            </div>
+            <fieldset>
+                <legend>Select your gender:</legend>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label>
+                <input type="radio" id="other" name="gender" value="other">
+                <label for="other">Other</label>
+            </fieldset>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div id="Add-Vehicle">
+        <h2 style="display: flex; justify-content: center;">Add Vehicle</h1>
+        <form method="get">
+            <div>
+                <label for="vehicle_company">Vehicle Make (Company): </label>
+                <input type="text" name="vehicle_company" placeholder="Enter Vehicle Make (Company)" required>
+            </div>
+            <div>
+                <label for="vehicle_model">Vehicle Model: </label>
+                <input type="text" name="vehicle_model" placeholder="Enter your Vehicle Model" required>
+            </div>
+            <fieldset>
+                <legend for="vehicle_type">Vehicle Type: </legend>
+                <input type="radio" id="2wheeler" name="vehicle_type" value="2wheeler">
+                <label for="male">2 Wheeler</label>
+                <input type="radio" id="3wheeler" name="vehicle_type" value="3wheeler">
+                <label for="female">3 Wheeler</label>
+                <input type="radio" id="4wheeler" name="vehicle_type" value="4wheeler">
+                <label for="other">4 wheeler</label>
+            </fieldset>
+            <div>
+                <label for="vehicle_number">Vehicle Number: </label>
+                <input type="text" name="vehicle_number" placeholder="Enter Vehicle Number: " required>
+            </div>
+            <div>
+                <label for="employee_id">Employee ID: </label>
+                <input type="text" name="employee_id" placeholder="Enter Employee ID" required>
+            </div>
+            <div>
+                <label for="identification">Vehicle Identification: </label>
+                <textarea name="identification" placeholder="Color, mark,visible accessory etc."></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div id="Give-Feedback">
+        <h2 style="display: flex; justify-content: center;">Add Employee</h1>
+        <form method="get">
+            <div>
+                <label for="name">Name: </label>
+                <input type="text" name="name" placeholder="Enter full name" required>
+            </div>
+            <div>
+                <label for="email">Email: </label>
+                <input type="email" name="email" placeholder="Enter your mail" required>
+            </div>
+            <div>
+                <label for="password">Password: </label>
+                <input type="password" name="password" placeholder="Enter your password" required>
+                <label for="confirm_password">Confirm Password: </label>
+                <input type="password" name="confirm_password" placeholder="Confirm your password" required>
+            </div>
+            <fieldset>
+                <legend>Select your gender:</legend>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label>
+                <input type="radio" id="other" name="gender" value="other">
+                <label for="other">Other</label>
+            </fieldset>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </body>
 </html>
