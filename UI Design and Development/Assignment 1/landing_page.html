@@ -32,7 +32,7 @@
         div{
             background-color: aliceblue;
             opacity: 85%;
-            border-radius: 10px;
+            border-radius: 20px;
             margin: 15px;
             padding: 15px;
         }
@@ -79,7 +79,7 @@
     </div>
 
     <div id="Add-Vehicle">
-        <h2 style="display: flex; justify-content: center;">Add Vehicle</h1>
+        <h2 style="display: flex; justify-content: center;">Add Vehicle</h2>
         <form method="get">
             <div>
                 <label for="vehicle_company">Vehicle Make (Company): </label>
@@ -114,34 +114,60 @@
         </form>
     </div>
 
-    <div id="Give-Feedback">
-        <h2 style="display: flex; justify-content: center;">Add Employee</h1>
-        <form method="get">
-            <div>
-                <label for="name">Name: </label>
-                <input type="text" name="name" placeholder="Enter full name" required>
+    <div style="justify-items: center;" id="Give-Feedback">
+        <h2>Get in Touch</h2>
+        <div style="display: flex;">
+            <img style="margin: 20px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLM9PA3k_lkRkRTETaCpAHRuhS4CeOgXDNOQ&s" alt="Feedback Image">
+            <form method="get">
+                <div>
+                    <label for="name">Name: </label>
+                    <input type="text" name="name" placeholder="John Doe" required>
+                </div>
+                <div>
+                    <label for="email">Email: </label>
+                    <input type="email" name="email" placeholder="Enter your mail" required>
+                </div>
+                <div>
+                    <label for="subject">Subject: </label>
+                    <input type="text" name="subject" placeholder="Enter Subject" required>
+                </div>
+                <div>
+                    <label for="message">Message: </label>
+                    <textarea name="message" placeholder="Enter Message" required></textarea>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: center; margin: 20px; font-size: x-large;" id="Pricing">
+        <div style="border: 2px solid; padding: 30px; justify-items: center;">
+            <h5>Cycle</h5>
+            <div style="border-radius: 100%; border: 1px solid;">
+                <b>$100<br></b>/month
             </div>
-            <div>
-                <label for="email">Email: </label>
-                <input type="email" name="email" placeholder="Enter your mail" required>
+            $10/day<br>
+            $100/month<br>
+            $500/year
+        </div>
+        <div style="border: 2px solid; padding: 30px; justify-items: center;">
+            <h5>Cycle</h5>
+            <div style="border-radius: 100%; border: 1px solid;">
+                <b>$100<br></b>/month
             </div>
-            <div>
-                <label for="password">Password: </label>
-                <input type="password" name="password" placeholder="Enter your password" required>
-                <label for="confirm_password">Confirm Password: </label>
-                <input type="password" name="confirm_password" placeholder="Confirm your password" required>
+            $10/day<br>
+            $100/month<br>
+            $500/year
+        </div>
+        <div style="border: 2px solid; padding: 30px; justify-items: center;">
+            <h5>Cycle</h5>
+            <div style="border-radius: 100%; border: 1px solid;">
+                <b>$100<br></b>/month
             </div>
-            <fieldset>
-                <legend>Select your gender:</legend>
-                <input type="radio" id="male" name="gender" value="male">
-                <label for="male">Male</label>
-                <input type="radio" id="female" name="gender" value="female">
-                <label for="female">Female</label>
-                <input type="radio" id="other" name="gender" value="other">
-                <label for="other">Other</label>
-            </fieldset>
-            <button type="submit">Submit</button>
-        </form>
+            $10/day<br>
+            $100/month<br>
+            $500/year
+        </div>
     </div>
 </body>
 </html>
