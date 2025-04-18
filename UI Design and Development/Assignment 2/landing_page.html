@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metacube Car Parking</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Naviation Bar -->
+    <nav>
+        <a href="landing_page.html">
+            <img src="https://europe.metacube.com/wp-content/uploads/2022/04/cropped-LogoMetacube_2786-1.png" height="30" width="90">
+        </a>
+        <a href="#employee-section" class="nav-link">Add Employee</a>
+        <a href="#vehicle-section" class="nav-link">Add Vehicle</a>
+        <a href="#feedback-section" class="nav-link">Give Feedback</a>
+        <a href="#pricing-section" class="nav-link">Pricing</a>
+    </nav>
+
+
+    <!-- Employee Section -->
+    <div id="employee-section" class="content-section">
+        <h2>Add Employee</h2>
+        <form>
+            <div class="form-group">
+                <label for="employee-name">Name</label>
+                <input type="text" id="employee-name" placeholder="Enter full name" required>
+            </div>
+            <div class="form-group">
+                <label for="employee-email">Email</label>
+                <input type="email" id="employee-email" placeholder="Enter your mail" required>
+            </div>
+            <div class="form-group">
+                <label for="employee-password">Password</label>
+                <input type="password" id="employee-password" placeholder="Enter your password" required>
+                <label for="employee-confirm-password">Confirm Password</label>
+                <input type="password" id="employee-confirm-password" placeholder="Confirm your password" required>
+            </div>
+            <fieldset class="form-group">
+                <legend>Gender</legend>
+                <input type="radio" id="gender-male" name="gender" value="male">
+                <label for="gender-male">Male</label>
+                <input type="radio" id="gender-female" name="gender" value="female">
+                <label for="gender-female">Female</label>
+                <input type="radio" id="gender-other" name="gender" value="other">
+                <label for="gender-other">Other</label>
+            </fieldset>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+
+    <!-- Vehicle Section -->
+    <div id="vehicle-section" class="content-section">
+        <h2>Add Vehicle</h2>
+        <form>
+            <div class="form-group">
+                <label for="vehicle-make">Vehicle Make</label>
+                <input type="text" id="vehicle-make" placeholder="Enter vehicle make" required>
+            </div>
+            <div class="form-group">
+                <label for="vehicle-model">Vehicle Model</label>
+                <input type="text" id="vehicle-model" placeholder="Enter vehicle model" required>
+            </div>
+            <fieldset class="form-group">
+                <legend>Vehicle Type</legend>
+                <input type="radio" id="vehicle-type-2wheeler" name="vehicle-type" value="2wheeler">
+                <label for="vehicle-type-2wheeler">2 Wheeler</label>
+                <input type="radio" id="vehicle-type-3wheeler" name="vehicle-type" value="3wheeler">
+                <label for="vehicle-type-3wheeler">3 Wheeler</label>
+                <input type="radio" id="vehicle-type-4wheeler" name="vehicle-type" value="4wheeler">
+                <label for="vehicle-type-4wheeler">4 Wheeler</label>
+            </fieldset>
+            <div class="form-group">
+                <label for="vehicle-number">Vehicle Number</label>
+                <input type="text" id="vehicle-number" placeholder="Enter vehicle number" required>
+            </div>
+            <div class="form-group">
+                <label for="employee-id">Employee ID</label>
+                <input type="text" id="employee-id" placeholder="Enter employee ID" required>
+            </div>
+            <div class="form-group">
+                <label for="vehicle-identification">Vehicle Identification</label>
+                <textarea id="vehicle-identification" placeholder="Enter identification details"></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+
+    <!-- Feedback Section -->
+    <div id="feedback-section" class="content-section">
+        <h2>Give Feedback</h2>
+        <form>
+            <div class="form-group">
+                <label for="feedback-name">Name</label>
+                <input type="text" id="feedback-name" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+                <label for="feedback-email">Email</label>
+                <input type="email" id="feedback-email" placeholder="Your email" required>
+            </div>
+            <div class="form-group">
+                <label for="feedback-subject">Subject</label>
+                <input type="text" id="feedback-subject" placeholder="Subject" required>
+            </div>
+            <div class="form-group">
+                <label for="feedback-message">Message</label>
+                <textarea id="feedback-message" placeholder="Your message" required></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+
+    <!-- Pricing Section -->
+    <div id="pricing-section" class="content-section">
+        <h2>Pricing</h2>
+        <div class="pricing-card">
+            <h5>Cycle</h5>
+            <div class="pricing-circle">$10/day</div>
+            <p>$100/month</p>
+            <p>$500/year</p>
+        </div>
+        <div class="pricing-card">
+            <h5>Motorcycle</h5>
+            <div class="pricing-circle">$20/day</div>
+            <p>$200/month</p>
+            <p>$1000/year</p>
+        </div>
+        <div class="pricing-card">
+            <h5>Car</h5>
+            <div class="pricing-circle">$50/day</div>
+            <p>$500/month</p>
+            <p>$2500/year</p>
+        </div>
+    </div>
+</body>
+</html>
