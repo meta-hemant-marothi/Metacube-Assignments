@@ -51,6 +51,11 @@ nav>a:hover{
     margin: 20px;
     border-radius: 20px;
     scroll-margin-top: 80px;
+    opacity: 75%;
+}
+
+.content-section h2{
+    text-align: center;
 }
 
 
