@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+
+    <!-- links of the font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+        
+        <!-- Link of the Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <title>Weather</title>
+</head>
+
+<body>
+
+    <!-- header Section -->
+    <header class="header">
+        <p class="space logo">LOGO Title</p>
+        <!-- nav links -->
+        <nav class="space">
+            <a href="">Home</a>
+            <a href="">Features</a>
+            <a href="">Reviews</a>
+            <a href="">Download</a>
+        </nav>
+        <div class="space icon">
+            <i class="fa-brands fa-facebook-f"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-google-plus-g"></i>
+        </div>
+    </header>
+ <div >
+
+ 
+    <!-- hero Section -->
+    <div class="imageback">
+        <div>
+
+            <h1 class="heroContent">
+
+                Get the most fun weather app
+            </h1>
+            <button class="DownloadBtn BTN">Download</button>
+            <button class="FeatureBtn BTN">Features</button>
+        </div>
+        <img class="phoneScreenSize" src="./images/phone1.png" alt="">
+    </div>
+
+    <!--  Features  -->
+    <section>
+        <h4 class="HeadingContentSection">Perfect Features</h4>
+        <p class="SubHeadingContentSection">Only necessary</p>
+        <div class="boxSection1">
+
+
+            <div class="features-Section">
+                <img class="image-feature"
+                    src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRsQgMgBLV5pFw28FPtdunJFLWo0u4C1l6GjZ2bNMfwFlTSxDmk"
+                    alt="">
+                <div>
+
+                    <h6 class="headingFeatures">Usability</h6>
+                    <p class="contentFeature">Sometimes the simplest things are the hardest to find. So we created a new
+                        line for everday life.Sometime the simplest things</p>
+                </div>
+
+            </div>
+            <div class="features-Section">
+                <img class="image-feature feature2"
+                    src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSMrMpVo5n1YSrXwhEx7IaFDIcFh7KPAgGwHybKjb0c9DWbchI_"
+                    alt="">
+
+                <div>
+
+                    <h6 class="headingFeatures">Parallax Effect</h6>
+                    <p class="contentFeature">Sometimes the simplest things are the hardest to find. So we created a new
+                        line for everday life.Sometime the simplest things</p>
+                </div>
+
+            </div>
+            <div class="features-Section">
+
+                <img class="image-feature"
+                    src="data:image/png;base64,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"
+                    alt="">
+                <div>
+
+                    <h6 class="headingFeatures">Unlimites colors</h6>
+                    <p class="contentFeature">Sometimes the simplest things are the hardest to find. So we created a new
+                        line for everday life.Sometime the simplest things</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="imageSlider">
+            <i class="fa-solid fa-chevron-left buttonSlider"></i>
+            <div class="prespectiveImage image3">
+
+                <img src="./images/drag3.png" class="left1SLide " alt="image 1 of the slide">
+            </div>
+
+            <div class="prespectiveImage  image2">
+
+                <img src="./images/drag1.png" class="prespective1image" alt="Image 2 of the slide">
+            </div>
+            <img src="./images/drag2.png"  class="imagemain" alt=" image 3">
+            <div class="prespectiveImage image2prespect image2">
+
+                <img src="./images/drag3.png" class="image3prespective " alt="image 4">
+            </div>
+
+            <div class="prespectiveImage image2prespect">
+
+                <img src="./images/drag1.png" class="image4prespective image3" alt="image 5">
+            </div>
+            <i class="fa-solid fa-chevron-right rightbtn"></i>
+        </div>
+    </section>
+
+    <!-- ScreenShots Section -->
+    <section>
+        <h4 class="HeadingContentSection">
+
+            Screenshots
+        </h4>
+        <p class="SubHeadingContentSection">The brightet image</p>
+        <div>
+
+
+            <div class="screenshotDiv">
+
+                <div class="container">
+                    <div class="bubble1" style="background-color: yellow;">Rainy</div>
+                    <div class="bubble2">9°</div>
+                    <img class="imageback1" src="./images/screen01.png" alt="">
+                    <div class="containerbackground">Cloudy</div>
+                </div>
+                <div style="margin: 170px;">
+                    <img src="./images/cloud1.png" alt="">
+                    <p class="headingScreenShot">When the clouds</p>
+                    <p class="contentScreenShot">Variable information on the air humidity, the feeling of the weather ,
+                        and the ability to share this with your friends</p>
+                      <div class="mainSecDummy">
+
+                          <div class="sec" style="z-index: 2;">95%</div>
+                          <div class="sec" style="z-index: 1;">9°</div>
+                          <div class="sec" style="z-index: 0;">Rainy</div>
+                        </div>
+                </div>
+            </div>
+            <div class="screenshotDiv">
+
+                <div class="container" style=" order: 2;">
+                    <div class="bubble1">Rainy</div>
+                    <div class="bubble2">9°</div>
+                    <img class="imageback1" src="./images/screen02.png" alt="">
+                    <div class="containerbackground">Sunny</div>
+                </div>
+                <div style="margin-right: 170px;">
+                    <img src="./images/sun1.png" alt="">
+                    <p class="headingScreenShot">When the clouds</p>
+                    <p class="contentScreenShot">Sometimes the simplest things are the hardest to find. So we created a
+                        new line for everday life.Sometime the simplest things</p>
+                        <div class="mainSecDummy">
+
+                            <div class="sec" style="z-index: 2;">95%</div>
+                            <div class="sec" style="z-index: 1;">9°</div>
+                            <div class="sec" style="z-index: 0;">Rainy</div>
+                          </div>
+                    </div>
+            </div>
+            <div class="screenshotDiv">
+
+                <div class="container">
+
+                    <div class="bubble1" style="background-color: aqua; ">Rainy</div>
+                    <div class="bubble2">9°</div>
+                    <img class="imageback1" src="./images/screen03.png" alt="">
+                    <div class="containerbackground" style="translate: -65px">Rainy</div>
+                </div>
+                <div style="margin: 170px;">
+                    <img src="./images/cloud1.png" alt="">
+                    <p class="headingScreenShot">When the rain</p>
+                    <p class="contentScreenShot">Sometimes the simplest things are the hardest to find. So we created a
+                        new line for everday life.Sometime the simplest things</p>
+                        <div class="mainSecDummy">
+
+                            <div class="sec" style="z-index: 2;">95%</div>
+                            <div class="sec" style="z-index: 1;">9°</div>
+                            <div class="sec" style="z-index: 0;">Rainy</div>
+                          </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+    <!-- reviews -->
+    <section>
+
+        <h4 class="HeadingContentSection">
+
+            What review are saying</h4>
+        <p class="SubHeadingContentSection">Review
+            </div>
+        <div class="reviewContainer">
+
+
+            <div class="box">
+                <p class="firstcreate"></p>
+                <p class="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, facere? Lorem
+                    ipsum dolor sit amet.</p>
+                <p class="creater">Jagda</p>
+                <p class="lastcreate"></p>
+            </div>
+            <div class="box">
+                <p class="firstcreate"></p>
+                <p class="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, facere? Lorem
+                    ipsum dolor sit amet.</p>
+                <p class="creater">jadasa</p>
+                <p class="lastcreate"></p>
+            </div>
+            <div class="box">
+                <p class="firstcreate"></p>
+                <p class="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, facere? Lorem
+                    ipsum dolor sit amet.</p>
+                <p class="creater">jskdks</p>
+                <p class="lastcreate"></p>
+            </div>
+            <div class="box">
+                <p class="firstcreate"></p>
+                <p class="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, facere? Lorem
+                    ipsum dolor sit amet.</p>
+                <p class="creater">ksajdksa</p>
+                <p class="lastcreate"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="DownloadSection"style="background-image: url('../images/downloadbg.png');">
+        <div class="downloadTop">
+            <h4 style="font-size: 30px;">How to Download the app?</h4>
+            <p class="downloadContent">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem nobis esse
+                inventore, sequi ut illo laboriosam praesentium? Excepturi alias laboriosam iste optio, molestias dolore
+                nostrum repellat eius ea, sapiente consectetur. </p>
+            <img src="./images/googleplay.png" alt="">
+            <img src="./images/appstor.png" max-width="33%" alt="">
+        </div>
+        <img style="width: 500px" src="./images/appdownload1.png" alt="">
+    </section>
+</div>
+    <!-- footer -->
+    <footer>
+        <div class="footerTop">
+
+            <img src="./images/footer-logo.png" alt="" height="100%">
+            <nav class="space">
+                <a href="">Home</a>
+                <a href="">Features</a>
+                <a href="">Reviews</a>
+                <a href="">Download</a>
+            </nav>
+            <div class="space icon">
+                <i class="fa-brands fa-facebook-f"></i>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-google-plus-g"></i>
+            </div>
+        </div>
+        <hr>
+        <p class="rights_Container">
+            All Rights Reserved
+        </p>
+    </footer>
+
+
+</body>
+
+</html>

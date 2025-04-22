@@ -1,0 +1,395 @@
+/* all content on the page  */
+* {
+    margin: 0px;
+    overflow-x: hidden;
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+
+
+}
+
+/*  header Section */
+.header {
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+    background-color: rgba(66, 66, 220, 0.553);
+    color: aliceblue;
+    height: 40px;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+
+/* background Image */
+.imageback {
+    background-image: url(./images/homebg.png);
+    display: flex;
+    width: 100vw;
+    background-size: contain;
+    margin: auto;
+    background-repeat: repeat-x;
+    height: 120vh;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+/* hero Content CSS */
+.heroContent {
+    color: white;
+    font-size: 50px;
+    width: 450px;
+}
+
+.phoneScreenSize {
+    height: 400px;
+}
+
+.boxSection1 {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 40px;
+}
+
+.feature2 {
+    margin-top: -10px;
+}
+
+.contentScreenShot {
+    max-width: 350px;
+    color: #000000b1;
+}
+
+.imageSlider {
+    display: flex;
+    align-items: center;
+    margin-inline: 100px;
+}
+
+.buttonSlider {
+
+    height: 20px;
+    width: 30px;
+}
+
+.image2prespect {
+    margin-left: -65px;
+}
+
+.image3prespective {
+    transform-style: preserve-3d;
+    transform: rotateY(-3deg);
+    scale: 0.65;
+}
+
+.prespective1image {
+    transform-style: preserve-3d;
+    transform: rotateY(3deg);
+    scale: 0.65;
+}
+
+.image4prespective {
+    transform-style: preserve-3d;
+    transform: rotateY(-5deg);
+    scale: 0.60;
+}
+
+.rightbtn {
+    height: 20px;
+    width: 30px;
+    padding-left: 10px;
+
+}
+
+.bubble2{
+    color: white;
+    width: 60px;
+    height: 60px;
+    background-color: blue;
+    border-radius: 100%;
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 408px;
+    left:-30px;
+}
+.bubble1{
+    color: white;
+    position: absolute;
+    background-color: orange;
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    left: 254px;
+    align-items: center;
+    top: 210px;
+}
+
+/* Download Sections css */
+.DownloadSection {
+    display: flex;
+    /* background-color: rgb(92, 92, 227); */
+    color: white;
+    padding-top: 150px;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+.downloadTop {
+    max-width: 30%;
+    padding: 20px;
+}
+
+.downloadContent {
+    font-size: 14px;
+    margin-block: 20px;
+    font-weight: 400;
+}
+
+footer {
+    background-color: rgb(27, 22, 58);
+    color: rgba(255, 255, 255, 0.772);
+    min-height: 100px;
+    padding-top: 30px;
+    width: 100%;
+}
+
+.reviewContainer {
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin-inline: 100px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Footer */
+.footerTop {
+    display: flex;
+    justify-content: space-around;
+}
+
+.rights_Container {
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    color: rgba(65, 58, 91, 0.79);
+}
+
+.left1SLide {
+    transform-style: preserve-3d;
+    transform: rotateY(5deg);
+    scale: 0.60;
+}
+
+.headingScreenShot {
+    font-size: xx-large;
+}
+
+.screenshotDiv {
+    margin-top: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imageback1 {
+    content: "Sunny";
+    background: content-box;
+}
+
+
+.container {
+    position: relative;
+    overflow: visible;
+ 
+}
+.mainSecDummy{
+    display: flex;
+    margin-top: 10px;
+}
+
+.sec{
+     width: 40px;
+     height: 40px;
+     border-radius: 20px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     border: 1px dotted rgba(0, 0, 0, 0.493);
+     color: rgba(0, 0, 0, 0.493);margin-right: -10px;
+     background-color: rgb(255, 255, 255);
+     font-size: 9px;
+}
+
+.containerbackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    color: #c6afaf7a;
+    font-size: 160px;
+    translate: -130px;
+}
+
+/*  All Headings on the page */
+.HeadingContentSection {
+    color: blue;
+    font-size: xx-large;
+    font-weight: 800;
+    align-self: center;
+    text-align: center;
+}
+
+.SubHeadingContentSection {
+    color: rgba(0, 0, 0, 0.605);
+    font-size: medium;
+    text-align: center;
+}
+
+/*  Styling of the Button */
+.DownloadBtn {
+    background-color: orangered;
+    color: white;
+    padding: 10px 25PX;
+    border: 0px;
+    border-radius: 4px;
+}
+
+.FeatureBtn {
+    background-color: rgb(48, 48, 172);
+    color: white;
+    padding: 10px 30PX;
+    border: 0px;
+    border-radius: 4px;
+}
+
+.BTN {
+    margin: 40px 20px;
+}
+
+.headingFeatures {
+    color: black;
+    font-size: medium;
+    font-weight: 600;
+}
+
+.contentFeature {
+    max-width: 200px;
+    font-size: 10px;
+    color: #000000b1;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.box {
+    width: 600px;
+    margin-block: 30px;
+    padding-inline: 40px;
+    box-sizing: border-box;
+}
+
+.firstcreate {
+    background-image: url("./images/openQuotes.png");
+    background-size: contain;
+    width: 45px;
+    height: 45px;
+    background-repeat: no-repeat;
+    position: relative;
+    left: -5%;
+}
+.lastcreate{
+    background-image: url("./images/closedQuotes.png");
+    background-size: contain;
+    width: 45px;
+    height: 45px;
+    background-repeat: no-repeat;
+    position: relative;
+    left: 93%;
+
+    
+}
+
+.space {
+    display: flex;
+    justify-content: space-evenly;
+    width: 33%;
+}
+
+.icon {
+    max-width: 10%;
+}
+
+.logo {
+    justify-content: left;
+    max-width: 25%;
+}
+
+.features-Section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.image-feature {
+    height: 50px;
+}
+
+
+/* Slider Section  */
+
+.prespectiveImage {
+    perspective: 100px;
+    overflow: hidden;
+    margin-inline: -70px;
+}
+
+.image3{
+    position: relative;
+    z-index: 1;
+}
+.image2{
+    position: relative;
+    z-index: 5;
+}
+.fa-solid{
+    z-index: 20;
+    margin-left: 8px;
+}
+.imagemain{
+    position: relative;
+    z-index: 10;
+    height: 500px;
+}
+
+
+.box {
+    color: rgba(0, 0, 0, 0.868);
+    max-width: 500px;
+
+}
+
+.creater {
+    margin-top: 10px;
+    font-size: small;
+    color: rgba(0, 0, 0, 0.587);
+}
+
+hr {
+    margin-inline: 10%;
+    margin-top: 30px;
+    border: 1px solid rgb(42, 27, 99);
+}
