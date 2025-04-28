@@ -6,8 +6,6 @@
     font-optical-sizing: auto;
     font-weight: 600;
     font-style: normal;
-
-
 }
 
 /*  header Section */
@@ -36,7 +34,6 @@
     align-items: center;
     justify-content: space-evenly;
 }
-
 
 /* hero Content CSS */
 .heroContent {
@@ -71,7 +68,6 @@
 }
 
 .buttonSlider {
-
     height: 20px;
     width: 30px;
 }
@@ -102,24 +98,23 @@
     height: 20px;
     width: 30px;
     padding-left: 10px;
-
 }
 
-.bubble2{
+.bubble2 {
     color: white;
     width: 60px;
     height: 60px;
     background-color: blue;
     border-radius: 100%;
-    display: flex
-;
+    display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
     top: 408px;
-    left:-30px;
+    left: -30px;
 }
-.bubble1{
+
+.bubble1 {
     color: white;
     position: absolute;
     background-color: orange;
@@ -205,28 +200,28 @@ footer {
     background: content-box;
 }
 
-
 .container {
     position: relative;
     overflow: visible;
- 
 }
-.mainSecDummy{
+
+.mainSecDummy {
     display: flex;
     margin-top: 10px;
 }
 
-.sec{
-     width: 40px;
-     height: 40px;
-     border-radius: 20px;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     border: 1px dotted rgba(0, 0, 0, 0.493);
-     color: rgba(0, 0, 0, 0.493);margin-right: -10px;
-     background-color: rgb(255, 255, 255);
-     font-size: 9px;
+.sec {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dotted rgba(0, 0, 0, 0.493);
+    color: rgba(0, 0, 0, 0.493);
+    margin-right: -10px;
+    background-color: rgb(255, 255, 255);
+    font-size: 9px;
 }
 
 .containerbackground {
@@ -311,7 +306,8 @@ a {
     position: relative;
     left: -5%;
 }
-.lastcreate{
+
+.lastcreate {
     background-image: url("./images/closedQuotes.png");
     background-size: contain;
     width: 45px;
@@ -319,8 +315,6 @@ a {
     background-repeat: no-repeat;
     position: relative;
     left: 93%;
-
-    
 }
 
 .space {
@@ -348,38 +342,37 @@ a {
     height: 50px;
 }
 
-
 /* Slider Section  */
-
 .prespectiveImage {
     perspective: 100px;
     overflow: hidden;
     margin-inline: -70px;
 }
 
-.image3{
+.image3 {
     position: relative;
     z-index: 1;
 }
-.image2{
+
+.image2 {
     position: relative;
     z-index: 5;
 }
-.fa-solid{
+
+.fa-solid {
     z-index: 20;
     margin-left: 8px;
 }
-.imagemain{
+
+.imagemain {
     position: relative;
     z-index: 10;
     height: 500px;
 }
 
-
 .box {
     color: rgba(0, 0, 0, 0.868);
     max-width: 500px;
-
 }
 
 .creater {
