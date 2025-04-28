@@ -2,10 +2,294 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Annex</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap Navbar & Sidebar</title>
+    
+    <!-- Bootstrap & jQuery -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            background: #fff; /* Changed to white */
+            color: #343a40; /* Dark text for readability */
+            padding-top: 20px;
+            border-right: 1px solid #ddd; /* Light border for subtle separation */
+        }
+        .sidebar a {
+    color: #343a40; /* Dark text */
+    display: flex;
+    align-items: center; /* Ensures icons and text align vertically */
+    padding: 10px;
+    text-decoration: none;
+}
+
+.sidebar a i {
+    width: 20px; /* Ensures all icons have the same width */
+    text-align: center;
+    margin-right: 10px; /* Adds consistent spacing */
+}
+
+.sidebar a:hover {
+    background: #f8f9fa; /* Light hover effect */
+}
+        .dropdown-icon {
+            transition: transform 0.3s ease-in-out;
+        }
+        .collapsed .dropdown-icon {
+            transform: rotate(-90deg); /* Rotates icon when collapsed */
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
+
+    <!-- Navbar -->
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="#"><i class="fa fa-dashboard"></i> Dashboard</a>
+        <a href="#"><i class="fa fa-calendar"></i> Calendar</a>
+        <a href="#"><i class="fa fa-file-text"></i> Forms</a>
     
+        <!-- Dropdown sections moved to the end -->
+        <a href="#advancedUiSubmenu" data-toggle="collapse" aria-expanded="false">
+            <i class="fa fa-desktop"></i> Advanced UI
+            <i class="fa fa-chevron-down dropdown-icon"></i>
+        </a>
+        <div class="collapse" id="advancedUiSubmenu">
+            <a href="#">Highlight</a>
+            <a href="#">Rating</a>
+            <a href="#">Alertify</a>
+            <a href="#">Range Slider</a>
+        </div>
+    
+        <a href="#uiElementsSubmenu" data-toggle="collapse" aria-expanded="false">
+            <i class="fa fa-paint-brush"></i> UI Elements
+            <i class="fa fa-chevron-down dropdown-icon"></i>
+        </a>
+        <div class="collapse" id="uiElementsSubmenu">
+            <a href="#">Buttons</a>
+            <a href="#">Cards</a>
+        </div>
+    
+        <a href="#chartsSubmenu" data-toggle="collapse" aria-expanded="false">
+            <i class="fa fa-bar-chart"></i> Charts
+            <i class="fa fa-chevron-down dropdown-icon"></i>
+        </a>
+        <div class="collapse" id="chartsSubmenu">
+            <a href="#">Flot Chart</a>
+            <a href="#">Morris Chart</a>
+        </div>
+    
+        <a href="#iconsSubmenu" data-toggle="collapse" aria-expanded="false">
+            <i class="fa fa-smile-o"></i> Icons
+            <i class="fa fa-chevron-down dropdown-icon"></i>
+        </a>
+        <div class="collapse" id="iconsSubmenu">
+            <a href="#">Material Design</a>
+            <a href="#">Ion Icons</a>
+            <a href="#">Font Awesome</a>
+        </div>
+    
+        <a href="#tablesSubmenu" data-toggle="collapse" aria-expanded="false">
+            <i class="fa fa-table"></i> Tables
+            <i class="fa fa-chevron-down dropdown-icon"></i>
+        </a>
+        <div class="collapse" id="tablesSubmenu">
+            <a href="#">Basic Table</a>
+            <a href="#">Data Table</a>
+            <a href="#">Responsive Table</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <a class="navbar-brand" href="#">Brand</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Messages</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="row" style="margin-bottom: 20px;">
+            <!-- Card 1: Visits Today -->
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="card m-b-30">
+                    <div class="card-body">
+                        <div class="d-flex flex-row">
+                            <div class="col-3 align-self-center">
+                                <div class="round">
+                                    <i class="mdi mdi-webcam"></i>
+                                </div>
+                            </div>
+                            <div class="col-6 align-self-center text-center">
+                                <div class="m-l-10">
+                                    <h5 class="mt-0 round-inner">$18090</h5>
+                                    <p class="mb-0 text-muted">Visits Today</p>
+                                </div>
+                            </div>
+                            <div class="col-3 align-self-end align-self-center">
+                                <h6 class="m-0 float-right text-center text-danger">
+                                    <i class="mdi mdi-arrow-down"></i>
+                                    <span>5.26%</span>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Card 2: Revenue -->
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="card m-b-30">
+                    <div class="card-body">
+                        <div class="d-flex flex-row">
+                            <div class="col-3 align-self-center">
+                                <div class="round">
+                                    <i class="mdi mdi-cash"></i>
+                                </div>
+                            </div>
+                            <div class="col-6 align-self-center text-center">
+                                <div class="m-l-10">
+                                    <h5 class="mt-0 round-inner">$45,200</h5>
+                                    <p class="mb-0 text-muted">This Month</p>
+                                </div>
+                            </div>
+                            <div class="col-3 align-self-end align-self-center">
+                                <h6 class="m-0 float-right text-center text-success">
+                                    <i class="mdi mdi-arrow-up"></i>
+                                    <span>12.45%</span>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Card 3: New Users -->
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="card m-b-30">
+                    <div class="card-body">
+                        <div class="d-flex flex-row">
+                            <div class="col-3 align-self-center">
+                                <div class="round">
+                                    <i class="mdi mdi-account-plus"></i>
+                                </div>
+                            </div>
+                            <div class="col-6 align-self-center text-center">
+                                <div class="m-l-10">
+                                    <h5 class="mt-0 round-inner">320</h5>
+                                    <p class="mb-0 text-muted">New Users</p>
+                                </div>
+                            </div>
+                            <div class="col-3 align-self-end align-self-center">
+                                <h6 class="m-0 float-right text-center text-success">
+                                    <i class="mdi mdi-arrow-up"></i>
+                                    <span>8.20%</span>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Card 4: Support Tickets -->
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="card m-b-30">
+                    <div class="card-body">
+                        <div class="d-flex flex-row">
+                            <div class="col-3 align-self-center">
+                                <div class="round">
+                                    <i class="mdi mdi-ticket"></i>
+                                </div>
+                            </div>
+                            <div class="col-6 align-self-center text-center">
+                                <div class="m-l-10">
+                                    <h5 class="mt-0 round-inner">150</h5>
+                                    <p class="mb-0 text-muted">Support Tickets</p>
+                                </div>
+                            </div>
+                            <div class="col-3 align-self-end align-self-center">
+                                <h6 class="m-0 float-right text-center text-danger">
+                                    <i class="mdi mdi-arrow-down"></i>
+                                    <span>3.85%</span>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-xl-8">
+                <div class="card m-b-30">
+                    <div class="card-body">
+                        <h5 class="header-title pb-3 mt-0">Overview</h5>
+                        <div id="multi-line-chart" style="height:400px;">
+                            <img src="char.svg" alt="Chart Image" style="width:100%; height:100%;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-12 col-xl-4">
+                <div class="card m-b-30">
+                    <div class="card-body">
+                        <a href="" class="btn btn-primary btn-sm float-right">More Info</a>
+                        <h5 class="header-title mt-0 pb-3">Revenue By Country</h5>
+                        <ul class="list-unstyled list-inline text-center">
+                            <li class="list-inline-item">
+                                <p>
+                                    <i class="mdi mdi-checkbox-blank-circle text-primary mr-2"></i>
+                                    Canada
+                                </p>
+                            </li>
+                            <li class="list-inline-item">
+                                <p>
+                                    <i class="mdi mdi-checkbox-blank-circle text-info mr-2"></i>
+                                    USA
+                                </p>
+                            </li>
+                            <li class="list-inline-item">
+                                <p>
+                                    <i class="mdi mdi-checkbox-blank-circle text-greylight mr-2"></i>
+                                    London
+                                </p>
+                            </li>
+                        </ul>
+                        <div id="morris-donut-chart" style="height:345px;">
+                            <img src="second.svg" alt="Revenue Chart" style="width:100%; height:100%;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript to handle dropdown icon rotation -->
+    <script>
+        $(document).ready(function() {
+            $('.dropdown-toggle').on('click', function() {
+                $(this).find('.dropdown-icon').toggleClass('collapsed');
+            });
+        });
+    </script>
+
 </body>
 </html>
