@@ -87,9 +87,9 @@
             </div>
             <div>
                 <label for="vehicle_model">Vehicle Model: </label>
-                <input type="text" name="vehicle_model" placeholder="Enter your Vehicle Model" required>
+                <input type="text" name="vehicle_model" placeholder="Enter your Vehicle Model" pattern="[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}" required>
             </div>
-            <fieldset>
+            <fieldset>  
                 <legend for="vehicle_type">Vehicle Type: </legend>
                 <input type="radio" id="2wheeler" name="vehicle_type" value="2wheeler">
                 <label for="male">2 Wheeler</label>
@@ -100,7 +100,7 @@
             </fieldset>
             <div>
                 <label for="vehicle_number">Vehicle Number: </label>
-                <input type="text" name="vehicle_number" placeholder="Enter Vehicle Number: " required>
+                <input type="text" name="vehicle_number" placeholder="Enter Vehicle Number: " pattern="[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}" required>
             </div>
             <div>
                 <label for="employee_id">Employee ID: </label>
