@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap Navbar & Sidebar</title>
     
+    <link rel="stylesheet" href="./style.css">
     <!-- Bootstrap & jQuery -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -16,6 +17,7 @@
     <style>
         .sidebar {
             width: 250px;
+            margin-left: 20px;
             height: 100vh;
             position: fixed;
             background: #fff; /* Changed to white */
@@ -24,12 +26,12 @@
             border-right: 1px solid #ddd; /* Light border for subtle separation */
         }
         .sidebar a {
-    color: #343a40; /* Dark text */
-    display: flex;
-    align-items: center; /* Ensures icons and text align vertically */
-    padding: 10px;
-    text-decoration: none;
-}
+            color: var(nav-item-color); /* Dark text */
+            display: flex;
+            align-items: center; /* Ensures icons and text align vertically */
+            padding: 10px;
+            text-decoration: none;
+        }
 
 .sidebar a i {
     width: 20px; /* Ensures all icons have the same width */
@@ -59,9 +61,6 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <a href="#"><i class="fa fa-dashboard"></i> Dashboard</a>
-        <a href="#"><i class="fa fa-calendar"></i> Calendar</a>
-        <a href="#"><i class="fa fa-file-text"></i> Forms</a>
-    
         <!-- Dropdown sections moved to the end -->
         <a href="#advancedUiSubmenu" data-toggle="collapse" aria-expanded="false">
             <i class="fa fa-desktop"></i> Advanced UI
@@ -73,6 +72,10 @@
             <a href="#">Alertify</a>
             <a href="#">Range Slider</a>
         </div>
+        <a href="#"><i class="fa fa-calendar"></i> Calendar</a>
+        <a href="#"><i class="fa fa-file-text"></i> Forms</a>
+    
+        
     
         <a href="#uiElementsSubmenu" data-toggle="collapse" aria-expanded="false">
             <i class="fa fa-paint-brush"></i> UI Elements
