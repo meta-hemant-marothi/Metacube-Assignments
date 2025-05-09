@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 1rem;
+  }
+  
+  h1 {
+    margin-bottom: 1rem;
+  }
+  
+  .tabs {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1rem;
+    width: 100%;
+    justify-content: space-around;
+  }
+  
+  .tabs li {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-bottom: 2px solid transparent;
+  }
+  
+  .tabs li.active {
+    border-bottom-color: #000;
+    font-weight: bold;
+  }
+  
+  .form-container {
+    width: 320px;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  
+  .step { margin-bottom: 1rem; }
+  .hidden { display: none; }
+  
+  input, select, textarea, button {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    box-sizing: border-box;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Password strength colors */
+  .strength-weak { border: 6px solid red; }
+  .strength-normal { border: 6px solid orange; }
+  .strength-strong { border: 6px solid green; }

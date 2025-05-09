@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Metacube Parking System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Main Heading -->
+  <h1>Metacube Parking System</h1>
+
+  <!-- Navigation Tabs -->
+  <ul class="tabs">
+    <li class="active" data-step="employee">Add Employee</li>
+    <li data-step="vehicle">Add Vehicle</li>
+    <li data-step="pass">Get Pass</li>
+  </ul>
+
+  <div class="form-container">
+    <form id="multi-form">
+      <!-- Employee Registration Steps -->
+      <div class="step" id="step-1">
+        <label for="fullName">Enter your name</label>
+        <input type="text" id="fullName" name="fullName" pattern="^[A-Za-z ]{2,}$" required />
+        <div class="buttons">
+          <button type="button" id="next-1">Next</button>
+        </div>
+      </div>
+
+      <div class="step hidden" id="step-2">
+        <p id="greeting">Hi! Can I know your gender?</p>
+        <label><input type="radio" name="gender" value="Male" required /> Male</label>
+        <label><input type="radio" name="gender" value="Female" /> Female</label>
+        <label><input type="radio" name="gender" value="Other" /> Other</label>
+        <div class="buttons">
+          <button type="button" id="prev-2">Previous</button>
+          <button type="button" id="next-2">Next</button>
+        </div>
+      </div>
+
+      <div class="step hidden" id="step-3">
+        <label for="email">Enter your email</label>
+        <input type="email" id="email" name="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[A-Za-z]{2,}$" required />
+        <div class="buttons">
+          <button type="button" id="prev-3">Previous</button>
+          <button type="button" id="next-3">Next</button>
+        </div>
+      </div>
+
+      <div class="step hidden" id="step-4">
+        <label for="password">Create a password</label>
+        <input type="password" id="password" name="password" pattern="(?=^.{8,}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W).*$" required />
+        <div id="strength-msg"></div>
+        <div class="buttons">
+          <button type="button" id="prev-4">Previous</button>
+          <button type="button" id="next-4">Next</button>
+        </div>
+      </div>
+
+      <div class="step hidden" id="step-5">
+        <label for="confirmPassword">Confirm your password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" pattern="(?=^.{8,}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W).*$" required />
+        <div class="buttons">
+          <button type="button" id="prev-5">Previous</button>
+          <button type="button" id="next-5">Next</button>
+        </div>
+      </div>
+
+      <div class="step hidden" id="step-6">
+        <label for="contact">Enter your contact number</label>
+        <input type="tel" id="contact" name="contact" pattern="^\\d{9,}$" required />
+        <div class="buttons">
+          <button type="button" id="prev-6">Previous</button>
+          <button type="button" id="submit-employee">Submit</button>
+        </div>
+      </div>
+
+      <div class="step hidden" id="employee-complete">
+        <p>Your Registration ID: <span id="regId"></span></p>
+        <div class="buttons">
+          <button type="button" id="next-empComplete">Next</button>
+        </div>
+      </div>
+
+      <!-- Vehicle Registration Steps -->
+      <div class="step hidden" id="step-v1">
+        <label for="vehicleName">Enter vehicle name</label>
+        <input type="text" id="vehicleName" name="vehicleName" required />
+        <div class="buttons">
+          <button type="button" id="prev-v1">Previous</button>
+          <button type="button" id="next-v1">Next</button>
+        </div>
+      </div>
+
+      <div class="step hidden" id="step-v2">
+        <label for="vehicleType">Which vehicle do you have?</label>
+        <select id="vehicleType" name="vehicleType" required>
+          <option value="">Select type</option>
+          <option value="Cycle">Cycle</option>
+          <option value="MotorCycle">MotorCycle</option>
+          <option value="Four Wheelers">Four Wheelers</option>
+        </select>
+        <div class="buttons">
+          <button type="button" id="prev-v2">Previous</button>
+          <button type="button" id="next-v2">Next</button>
+        </div>
+      </div>
+
+      <div class="step hidden" id="step-v3">
+        <label for="vehicleNumber">Enter vehicle number (e.g. RJ14-MN-3435)</label>
+        <input type="text" id="vehicleNumber" name="vehicleNumber" pattern="^[A-Z]{2}\\d{2}-[A-Z]{2}-\\d{4}$" required />
+        <div class="buttons">
+          <button type="button" id="prev-v3">Previous</button>
+          <button type="button" id="next-v3">Next</button>
+        </div>
+      </div>
+
+      <div class="step hidden" id="step-v4">
+        <label for="employeeId">Your Employee ID</label>
+        <input type="text" id="employeeId" name="employeeId" readonly />
+        <div class="buttons">
+          <button type="button" id="prev-v4">Previous</button>
+          <button type="button" id="next-v4">Next</button>
+        </div>
+      </div>
+
+      <div class="step hidden" id="step-v5">
+        <label for="identification">Any additional identification?</label>
+        <textarea id="identification" name="identification" required></textarea>
+        <div class="buttons">
+          <button type="button" id="prev-v5">Previous</button>
+          <button type="button" id="submit-vehicle">Submit Vehicle</button>
+        </div>
+      </div>
+
+      <!-- Pass Selection -->
+      <div class="step hidden" id="step-pass">
+        <p>Select your plan:</p>
+        <label><input type="radio" name="plan" value="daily" required /> <span id="label-daily">Daily</span></label>
+        <label><input type="radio" name="plan" value="monthly" /> <span id="label-monthly">Monthly</span></label>
+        <label><input type="radio" name="plan" value="yearly" /> <span id="label-yearly">Yearly</span></label>
+
+        <label for="currency">Currency:</label>
+        <select id="currency" name="currency">
+          <option value="INR">INR</option>
+          <option value="USD">USD</option>
+          <option value="YEN">YEN</option>
+        </select>
+
+        <div class="buttons">
+          <button type="button" id="prev-pass">Previous</button>
+          <button type="button" id="get-pass">Get Pass</button>
+        </div>
+      </div>
+
+      <div class="step hidden" id="step-pass-complete">
+        <p>Your final price: <span id="finalPrice"></span></p>
+        <!-- New Feature: View Summary link -->
+        <a href="summary.html" id="view-summary">View Summary of Your Details</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
