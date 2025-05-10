@@ -1,0 +1,153 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+    margin: 0;
+    padding: 0;
+  }
+  
+  
+  .box-cont {
+    padding: 2rem;
+  }
+  
+  
+  h1 {
+    text-align: center;
+  }
+  
+  
+  .columns {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  
+  .column {
+    background: #ffffff;
+    flex: 1;
+    padding: 1rem;
+    border-radius: 6px;
+    min-height: 300px;
+  }
+  
+  
+  .task {
+    background: #fafafa;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    /* border-left: 5px solid gray; */
+    cursor: grab;
+  }
+  
+  
+  .task h3 {
+    margin: 0 0 0.5rem 0;
+  }
+  
+  
+  .task .meta {
+    font-size: 0.85rem;
+    color: #555;
+  }
+  
+  
+  .actions {
+    margin-top: 0.5rem;
+  }
+  
+  
+  .actions button {
+    margin-right: 0.5rem;
+    padding: 4px 8px;
+    border: none;
+    cursor: pointer;
+    background: #007bff;
+    color: white;
+    border-radius: 3px;
+  }
+  
+  
+  .actions button:last-child {
+    background: #dc3545;
+  }
+  
+  
+  .add-btn {
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    display: block;
+    margin-left: auto;
+  }
+  
+  
+  .cont-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  .box-modal {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+  }
+  
+  
+  .box-modal form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  
+  .box-modal form label {
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  
+  .box-modal form input,
+  .box-modal form textarea,
+  .box-modal form select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  
+  .box-modal-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  
+  .box-modal-actions button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+  }
+  
+  
+  .box-modal-actions button:last-child {
+    background-color: #6c757d;
+  }
+  
