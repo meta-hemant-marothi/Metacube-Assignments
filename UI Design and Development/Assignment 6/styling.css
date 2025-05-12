@@ -1,85 +1,76 @@
-/* Global Variables */
 :root {
-    --primary-color: #2a9d8f;
-    --secondary-color: #264653;
-    --accent-color: #e76f51;
+    --primary: #2a9d8f;
+    --secondary: #264653;
+    --accent: #e76f51;
     --light-bg: #f1faee;
     --light-gray: #e0e0e0;
     --dark-text: #2d2d2d;
-    --border-radius: 8px;
-    --transition-speed: 0.3s;
-    --max-width: 900px;
+    --radius: 8px;
+    --speed: 0.3s;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 body {
-    font-family: 'Segoe UI', sans-serif;
     background: var(--light-bg);
     color: var(--dark-text);
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
 }
 
-/* Navigation */
 nav {
     width: 100%;
-    max-width: var(--max-width);
-    background: var(--secondary-color);
-    padding: 0.75rem 1rem;
+    max-width: 900px;
     display: flex;
     justify-content: space-between;
-    border-radius: var(--border-radius);
+    background: var(--secondary);
+    padding: .75rem 1rem;
+    border-radius: var(--radius);
+    margin-bottom: 2rem;
     position: sticky;
     top: 1rem;
     z-index: 100;
-    margin-bottom: 2rem;
 }
 
 nav a {
     color: #fff;
     text-decoration: none;
-    margin: 0 0.5rem;
-    transition: color var(--transition-speed);
+    margin: 0 .5rem;
+    transition: color var(--speed);
 }
 
 nav a:hover {
-    color: var(--accent-color);
+    color: var(--accent);
 }
 
-/* Cover */
-.cover-image {
+.cover {
     width: 100%;
-    max-width: var(--max-width);
-    border-radius: var(--border-radius);
+    max-width: 900px;
+    border-radius: var(--radius);
     overflow: hidden;
     margin-bottom: 2rem;
 }
 
-.cover-image img {
+.cover img {
     width: 100%;
     display: block;
 }
 
-/* Collapsible Sections */
-.content-section {
+.section {
     width: 100%;
-    max-width: var(--max-width);
+    max-width: 900px;
     background: #fff;
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
     margin-bottom: 1.5rem;
-    scroll-margin-top: 60px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+    position: relative;
 }
 
 .toggle-input {
@@ -90,21 +81,21 @@ nav a:hover {
 
 .toggle-label {
     display: block;
-    background: var(--primary-color);
+    background: var(--primary);
     color: #fff;
-    padding: 0.75rem 1rem;
+    padding: .75rem 1rem;
     cursor: pointer;
     user-select: none;
-    border-radius: var(--border-radius) var(--border-radius) 0 0;
-    position: relative;
+    border-radius: var(--radius) var(--radius) 0 0;
     font-size: 1.2rem;
+    position: relative;
 }
 
 .toggle-label::after {
     content: "▼";
     position: absolute;
     right: 1rem;
-    transition: transform var(--transition-speed);
+    transition: transform var(--speed);
 }
 
 .section-body {
@@ -112,10 +103,9 @@ nav a:hover {
     border-top: 1px solid var(--light-gray);
     max-height: 999px;
     overflow: hidden;
-    transition: max-height var(--transition-speed) ease;
+    transition: max-height var(--speed) ease;
 }
 
-/* Collapse */
 .toggle-input:not(:checked)+.toggle-label+.section-body {
     max-height: 0;
     padding-top: 0;
@@ -127,83 +117,64 @@ nav a:hover {
     transform: rotate(-90deg);
 }
 
-/* Forms */
-form {
-    display: flex;
-    flex-direction: column;
+/* Step fields */
+.step-field {
+    display: none;
 }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
+.step-field.active {
+    display: block;
+}
+
+.form-group,
+fieldset {
     margin-bottom: 1rem;
 }
 
-.form-group label {
-    margin-bottom: 0.5rem;
+label {
+    margin-bottom: .5rem;
     font-weight: 500;
+    display: block;
 }
 
 input,
+select,
 textarea {
-    padding: 0.5rem;
+    width: 100%;
+    padding: .5rem;
     border: 1px solid var(--light-gray);
-    border-radius: var(--border-radius);
-    transition: border var(--transition-speed);
+    border-radius: var(--radius);
+    transition: border var(--speed);
 }
 
 input:focus,
+select:focus,
 textarea:focus {
     outline: none;
-    border-color: var(--primary-color);
-}
-
-textarea {
-    min-height: 80px;
-    resize: vertical;
-}
-
-fieldset {
-    border: none;
-    margin-bottom: 1rem;
-}
-
-legend {
-    margin-bottom: 0.5rem;
-    font-weight: 500;
+    border-color: var(--primary);
 }
 
 .radio-group {
     display: flex;
-    align-items: center;
     gap: 1rem;
+    align-items: center;
 }
 
-.radio-group input {
-    margin: 0;
-}
-
-.radio-group label {
-    cursor: pointer;
-}
-
-button[type="submit"] {
-    background: var(--primary-color);
+button {
+    background: var(--primary);
     color: #fff;
-    padding: 0.75rem;
+    padding: .75rem;
     border: none;
-    border-radius: var(--border-radius);
-    font-size: 1rem;
+    border-radius: var(--radius);
     cursor: pointer;
-    transition: background var(--transition-speed);
-    align-self: flex-start;
+    transition: background var(--speed);
 }
 
 button:hover {
-    background: var(--accent-color);
+    background: var(--accent);
 }
 
-/* Pricing Cards */
+/* Pricing cards */
 #pricing-section {
     display: flex;
     gap: 1rem;
@@ -213,37 +184,22 @@ button:hover {
 .pricing-card {
     background: #fff;
     border: 1px solid var(--light-gray);
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
     padding: 1.5rem;
     flex: 1 1 calc(33% - 1rem);
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.pricing-card h5 {
-    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
 }
 
 .pricing-circle {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    background: var(--accent-color);
+    background: var(--accent);
     display: flex;
     align-items: center;
     justify-content: center;
-    align-self: center;
     color: #fff;
     font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-@media (max-width: 768px) {
-    #pricing-section {
-        flex-direction: column;
-    }
-
-    .pricing-card {
-        flex: 1 1 100%;
-    }
+    margin: 0 auto 1rem;
 }
