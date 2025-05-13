@@ -1,168 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Metacube Parking System</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metacube Parking System</title>
+    <style>
+        :root {
+            --primary: #2a9d8f;
+            --secondary: #264653;
+            --accent: #e76f51;
+            --light-bg: #f1faee;
+            --light-gray: #e0e0e0;
+            --dark-text: #2d2d2d;
+            --radius: 8px;
+            --speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: var(--light-bg);
+            color: var(--dark-text);
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            justify-content: space-between;
+            background: var(--secondary);
+            padding: .75rem 1rem;
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 1rem;
+            z-index: 100;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 .5rem;
+            transition: color var(--speed);
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .cover {
+            width: 100%;
+            max-width: 900px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .cover img {
+            width: 100%;
+            display: block;
+        }
+
+        .section {
+            width: 100%;
+            max-width: 900px;
+            background: #fff;
+            border-radius: var(--radius);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+            position: relative;
+        }
+
+        .toggle-input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .toggle-label {
+            display: block;
+            background: var(--primary);
+            color: #fff;
+            padding: .75rem 1rem;
+            cursor: pointer;
+            user-select: none;
+            border-radius: var(--radius) var(--radius) 0 0;
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        .toggle-label::after {
+            content: "▼";
+            position: absolute;
+            right: 1rem;
+            transition: transform var(--speed);
+        }
+
+        .section-body {
+            padding: 1rem;
+            border-top: 1px solid var(--light-gray);
+            max-height: 999px;
+            overflow: hidden;
+            transition: max-height var(--speed) ease;
+        }
+
+        .toggle-input:not(:checked)+.toggle-label+.section-body {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            border-top: none;
+        }
+
+        .toggle-input:not(:checked)+.toggle-label::after {
+            transform: rotate(-90deg);
+        }
+
+        /* Step fields */
+        .step-field {
+            display: none;
+        }
+
+        .step-field.active {
+            display: block;
+        }
+
+        .form-group,
+        fieldset {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            margin-bottom: .5rem;
+            font-weight: 500;
+            display: block;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: .5rem;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--radius);
+            transition: border var(--speed);
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        button {
+            background: var(--primary);
+            color: #fff;
+            padding: .75rem;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: background var(--speed);
+        }
+
+        button:hover {
+            background: var(--accent);
+        }
+
+        /* Pricing cards */
+        #pricing-section {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .pricing-card {
+            background: #fff;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            flex: 1 1 calc(33% - 1rem);
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+        }
+
+        .pricing-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 600;
+            margin: 0 auto 1rem;
+        }
+    </style>
 </head>
+
 <body>
-  <!-- Main Heading -->
-  <h1>Metacube Parking System</h1>
-
-  <!-- Navigation Tabs -->
-  <ul class="tabs">
-    <li class="active" data-step="employee">Add Employee</li>
-    <li data-step="vehicle">Add Vehicle</li>
-    <li data-step="pass">Get Pass</li>
-  </ul>
-
-  <div class="form-container">
-    <form id="multi-form">
-      <!-- Employee Registration Steps -->
-      <div class="step" id="step-1">
-        <label for="fullName">Enter your name</label>
-        <input type="text" id="fullName" name="fullName" pattern="^[A-Za-z ]{2,}$" required />
-        <div class="buttons">
-          <button type="button" id="next-1">Next</button>
+    <nav>
+        <a href="#"><img src="https://europe.metacube.com/wp-content/uploads/2022/04/cropped-LogoMetacube_2786-1.png"
+                height="30" width="90" alt="Logo"></a>
+        <a href="#section-employee" id="btn-employee">Add Employee</a>
+        <a href="#section-vehicle" id="btn-vehicle" class="disabled">Add Vehicle</a>
+        <a href="#section-pricing" id="btn-pricing" class="disabled">Get Pass</a>
+    </nav>
+    <div class="cover"><img src="pexels-apasaric-325185.jpg" alt="Parking Cover" height="300"></div>
+    <!-- Employee Section -->
+    <div class="section" id="section-employee">
+        <label class="toggle-label">Employee Registration</label>
+        <div class="section-body">
+            <form id="form-employee">
+                <div class="step-field active" data-step="0">
+                    <label for="emp-name">Enter your name</label>
+                    <input type="text" id="emp-name" required />
+                </div>
+                <div class="step-field" data-step="1">
+                    <label>Hi <span id="greet-name"></span>! What's your gender?</label>
+                    <fieldset class="radio-group">
+                        <input type="radio" id="gender-male" name="gender" value="Male"><label
+                            for="gender-male">Male</label>
+                        <input type="radio" id="gender-female" name="gender" value="Female"><label
+                            for="gender-female">Female</label>
+                        <input type="radio" id="gender-other" name="gender" value="Other"><label
+                            for="gender-other">Other</label>
+                    </fieldset>
+                </div>
+                <div class="step-field" data-step="2">
+                    <label for="emp-email">Enter your email</label>
+                    <input type="email" id="emp-email" required />
+                </div>
+                <div class="step-field" data-step="3">
+                    <label for="emp-pass">Create password</label>
+                    <input type="password" id="emp-pass" required />
+                </div>
+                <div class="step-field" data-step="4">
+                    <label for="emp-pass2">Confirm password</label>
+                    <input type="password" id="emp-pass2" required />
+                </div>
+                <div class="step-field" data-step="5">
+                    <label for="emp-contact">Enter contact number</label>
+                    <input type="text" id="emp-contact" required />
+                </div>
+            </form>
         </div>
-      </div>
-
-      <div class="step hidden" id="step-2">
-        <p id="greeting">Hi! Can I know your gender?</p>
-        <label><input type="radio" name="gender" value="Male" required /> Male</label>
-        <label><input type="radio" name="gender" value="Female" /> Female</label>
-        <label><input type="radio" name="gender" value="Other" /> Other</label>
-        <div class="buttons">
-          <button type="button" id="prev-2">Previous</button>
-          <button type="button" id="next-2">Next</button>
+    </div>
+    <!-- Vehicle Section -->
+    <div class="section" id="section-vehicle">
+        <label class="toggle-label">Vehicle Registration</label>
+        <div class="section-body">
+            <form id="form-vehicle">
+                <div class="step-field active" data-step="0">
+                    <label for="veh-name">Enter vehicle name</label>
+                    <input type="text" id="veh-name" required />
+                </div>
+                <div class="step-field" data-step="1">
+                    <label>Which vehicle do you have?</label>
+                    <select id="veh-type">
+                        <option value="Cycle">Cycle</option>
+                        <option value="Motorcycle">Motorcycle</option>
+                        <option value="FourWheeler">Four Wheelers</option>
+                    </select>
+                </div>
+                <div class="step-field" data-step="2">
+                    <label for="veh-number">Enter vehicle number</label>
+                    <input type="text" id="veh-number" required />
+                </div>
+                <div class="step-field" data-step="3">
+                    <label for="veh-empid">Your Employee ID</label>
+                    <input type="text" id="veh-empid" readonly />
+                </div>
+                <div class="step-field" data-step="4">
+                    <label for="veh-ident">Identification (Color, marks, etc.)</label>
+                    <textarea id="veh-ident"></textarea>
+                </div>
+            </form>
         </div>
-      </div>
-
-      <div class="step hidden" id="step-3">
-        <label for="email">Enter your email</label>
-        <input type="email" id="email" name="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[A-Za-z]{2,}$" required />
-        <div class="buttons">
-          <button type="button" id="prev-3">Previous</button>
-          <button type="button" id="next-3">Next</button>
+    </div>
+    <!-- Pricing Section -->
+    <div class="section" id="section-pricing">
+        <label class="toggle-label">Pricing & Pass</label>
+        <div class="section-body">
+            <div style="margin-bottom:1rem;">
+                <label for="currency">Currency:</label>
+                <select id="currency">
+                    <option value="INR">INR</option>
+                    <option value="USD">USD</option>
+                    <option value="YEN">YEN</option>
+                </select>
+            </div>
+            <div id="pricing-section"></div>
+            <button id="btn-getpass">Get Pass</button>
+            <div id="final-pass" style="margin-top:1rem;font-weight:600;"></div>
         </div>
-      </div>
+    </div>
 
-      <div class="step hidden" id="step-4">
-        <label for="password">Create a password</label>
-        <input type="password" id="password" name="password" pattern="(?=^.{8,}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W).*$" required />
-        <div id="strength-msg"></div>
-        <div class="buttons">
-          <button type="button" id="prev-4">Previous</button>
-          <button type="button" id="next-4">Next</button>
-        </div>
-      </div>
-
-      <div class="step hidden" id="step-5">
-        <label for="confirmPassword">Confirm your password</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" pattern="(?=^.{8,}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W).*$" required />
-        <div class="buttons">
-          <button type="button" id="prev-5">Previous</button>
-          <button type="button" id="next-5">Next</button>
-        </div>
-      </div>
-
-      <div class="step hidden" id="step-6">
-        <label for="contact">Enter your contact number</label>
-        <input type="tel" id="contact" name="contact" pattern="^\\d{9,}$" required />
-        <div class="buttons">
-          <button type="button" id="prev-6">Previous</button>
-          <button type="button" id="submit-employee">Submit</button>
-        </div>
-      </div>
-
-      <div class="step hidden" id="employee-complete">
-        <p>Your Registration ID: <span id="regId"></span></p>
-        <div class="buttons">
-          <button type="button" id="next-empComplete">Next</button>
-        </div>
-      </div>
-
-      <!-- Vehicle Registration Steps -->
-      <div class="step hidden" id="step-v1">
-        <label for="vehicleName">Enter vehicle name</label>
-        <input type="text" id="vehicleName" name="vehicleName" required />
-        <div class="buttons">
-          <button type="button" id="prev-v1">Previous</button>
-          <button type="button" id="next-v1">Next</button>
-        </div>
-      </div>
-
-      <div class="step hidden" id="step-v2">
-        <label for="vehicleType">Which vehicle do you have?</label>
-        <select id="vehicleType" name="vehicleType" required>
-          <option value="">Select type</option>
-          <option value="Cycle">Cycle</option>
-          <option value="MotorCycle">MotorCycle</option>
-          <option value="Four Wheelers">Four Wheelers</option>
-        </select>
-        <div class="buttons">
-          <button type="button" id="prev-v2">Previous</button>
-          <button type="button" id="next-v2">Next</button>
-        </div>
-      </div>
-
-      <div class="step hidden" id="step-v3">
-        <label for="vehicleNumber">Enter vehicle number (e.g. RJ14-MN-3435)</label>
-        <input type="text" id="vehicleNumber" name="vehicleNumber" pattern="^[A-Z]{2}\\d{2}-[A-Z]{2}-\\d{4}$" required />
-        <div class="buttons">
-          <button type="button" id="prev-v3">Previous</button>
-          <button type="button" id="next-v3">Next</button>
-        </div>
-      </div>
-
-      <div class="step hidden" id="step-v4">
-        <label for="employeeId">Your Employee ID</label>
-        <input type="text" id="employeeId" name="employeeId" readonly />
-        <div class="buttons">
-          <button type="button" id="prev-v4">Previous</button>
-          <button type="button" id="next-v4">Next</button>
-        </div>
-      </div>
-
-      <div class="step hidden" id="step-v5">
-        <label for="identification">Any additional identification?</label>
-        <textarea id="identification" name="identification" required></textarea>
-        <div class="buttons">
-          <button type="button" id="prev-v5">Previous</button>
-          <button type="button" id="submit-vehicle">Submit Vehicle</button>
-        </div>
-      </div>
-
-      <!-- Pass Selection -->
-      <div class="step hidden" id="step-pass">
-        <p>Select your plan:</p>
-        <label><input type="radio" name="plan" value="daily" required /> <span id="label-daily">Daily</span></label>
-        <label><input type="radio" name="plan" value="monthly" /> <span id="label-monthly">Monthly</span></label>
-        <label><input type="radio" name="plan" value="yearly" /> <span id="label-yearly">Yearly</span></label>
-
-        <label for="currency">Currency:</label>
-        <select id="currency" name="currency">
-          <option value="INR">INR</option>
-          <option value="USD">USD</option>
-          <option value="YEN">YEN</option>
-        </select>
-
-        <div class="buttons">
-          <button type="button" id="prev-pass">Previous</button>
-          <button type="button" id="get-pass">Get Pass</button>
-        </div>
-      </div>
-
-      <div class="step hidden" id="step-pass-complete">
-        <p>Your final price: <span id="finalPrice"></span></p>
-        <!-- New Feature: View Summary link -->
-        <a href="summary.html" id="view-summary">View Summary of Your Details</a>
-      </div>
-    </form>
-  </div>
-
-  <script src="script.js"></script>
+    <script src="./dist/index.js"></script>
 </body>
+
 </html>
