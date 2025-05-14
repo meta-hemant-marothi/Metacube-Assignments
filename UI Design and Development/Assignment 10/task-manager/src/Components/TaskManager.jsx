@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./task.css";
 
-// Initial structure for task categories
+
 const initialTasks = {
   new: [],         
   inProgress: [], 
@@ -9,74 +9,71 @@ const initialTasks = {
 };
 
 const TaskManager = () => {
-  // State to manage tasks
+ 
   const [tasks, setTasks] = useState(initialTasks);
 
-  // modal visibility
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // edited or created
+ 
   const [currentTask, setCurrentTask] = useState(null);
 
-  // dragged for reordering
+  
   const [draggedTask, setDraggedTask] = useState(null);
 
-  // open the modal for adding or editing a task
+  
   const openModal = (task = null) => {
     setCurrentTask(task);  
     setIsModalOpen(true);   
-  };
+      };
 
-  // close the modal
+
   const closeModal = () => {
     setCurrentTask(null);  
     setIsModalOpen(false);  
   };
 
-  //  save a new task or update an existing one
+ 
   const saveTask = (task) => {
     const updatedTasks = { ...tasks };
-    
+  
     if (task.id) {
-      // Remove the task from its previous category
       Object.keys(updatedTasks).forEach((key) => {
         updatedTasks[key] = updatedTasks[key].filter((t) => t.id !== task.id);
       });
-
-      // Add the task to its new category
+  
       updatedTasks[task.status].push({
         ...task,
-        completionDate: task.status === "completed" ? new Date() : null, 
+        completionDate: task.status === "completed" ? new Date().toISOString() : null, 
       });
     } else {
-      // Create a new task with a unique ID
       const newTask = {
         ...task,
-        id: Date.now().toString(),    
-        status: "new",                
-        creationDate: new Date(),
+        id: Date.now().toString(),
+        status: "new",
+        creationDate: new Date().toISOString(),
         completionDate: null,
       };
       updatedTasks.new.push(newTask);
     }
-
-    setTasks(updatedTasks);  
-    closeModal();         
+  
+    setTasks(updatedTasks);
+    closeModal();
   };
 
-  //  delete a task
+ 
   const deleteTask = (id, status) => {
     const updated = { ...tasks };
     updated[status] = updated[status].filter((task) => task.id !== id); 
     setTasks(updated); 
   };
 
-  //  starting the drag
+ 
   const handleDragStart = (task, status) => {
     setDraggedTask({ ...task, from: status });
   };
 
-  // drop action
+  
   const handleDrop = (targetStatus) => {
     if (!draggedTask) return; 
 
@@ -88,16 +85,17 @@ const TaskManager = () => {
     setDraggedTask(null)
   };
 
-  //  dropping (prevent default behavior)
+
   const allowDrop = (e) => e.preventDefault();
 
-  // color based on priority level
+  
+ 
   const getPriorityColor = (priority) => {
     switch (priority) {
-      case "High": return "#006d77";   
-      case "Medium": return "#83c5be"; 
-      case "Low": return "#edf6f9";    
-      default: return "gray";         
+      case "High": return "#FF6B6B"; // Light red for high priority
+      case "Medium": return "#4ECDC4"; // Aqua for medium priority
+      case "Low": return "#5E60CE"; // Blue for low priority
+      default: return "#6C757D"; // Neutral gray for undefined priority
     }
   };
 
@@ -114,8 +112,8 @@ const TaskManager = () => {
           <div
             key={status}
             className="column"
-            onDragOver={allowDrop} // Allow drop on this column
-            onDrop={() => handleDrop(status)} // Handle drop event
+            onDragOver={allowDrop} 
+            onDrop={() => handleDrop(status)} 
           >
             <h2>{status.replace(/([A-Z])/g, " $1")}</h2>
 
@@ -129,12 +127,15 @@ const TaskManager = () => {
                 style={{ backgroundColor: `${getPriorityColor(task.priority)}` }}
               >
                 <h3>{task.title}</h3>
-                <h6>{new Date(parseInt(task.id)).toLocaleDateString()}</h6> 
-                {task.completionDate && <h3>{task.completionDate.toLocaleDateString()}</h3>} 
+                <h6>Created on: {new Date(parseInt(task.id)).toLocaleDateString()}</h6> 
+                {task.completionDate && (
+  <h6>Completed on: {new Date(task.completionDate).toLocaleString()}</h6>
+)}
+
                 <p>{task.description}</p>
                 <p className="meta">Priority: {task.priority}</p>
 
-                {/* Actions for editing/deleting tasks (not for completed tasks) */}
+                
                 {status !== "completed" && (
                   <div className="actions">
                     <button onClick={() => openModal(task)}>Edit</button>
@@ -147,7 +148,7 @@ const TaskManager = () => {
         ))}
       </div>
 
-      {/* Modal for adding or editing tasks */}
+    
       {isModalOpen && (
         <div className="cont-overlay">
           <div className="box-modal">
@@ -165,7 +166,7 @@ const TaskManager = () => {
               };
               saveTask(taskData);
             }}>
-              {/* Inputs for task details */}
+          
               <label>Title</label>
               <input name="title" defaultValue={currentTask?.title || ""} required />
 
@@ -179,7 +180,6 @@ const TaskManager = () => {
                 <option value="Low">Low</option>
               </select>
 
-              {/* Modal actions */}
               <div className="box-modal-actions">
                 <button type="submit">Save</button>
                 <button type="button" onClick={closeModal}>Cancel</button>

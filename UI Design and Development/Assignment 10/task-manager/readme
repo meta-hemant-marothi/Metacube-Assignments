@@ -1,0 +1,3 @@
+
+command to run project using vite
+node node_modules/vite/bin/vite.js 
