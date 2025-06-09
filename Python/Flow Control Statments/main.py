@@ -25,3 +25,4 @@ chemistry = int(input("Enter Chemistry marks: "))
 result = calculate_grade(maths, physics, chemistry)
 print(result)
 
+2
